@@ -1021,6 +1021,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="#thread">Story</a></li>
+      <li><a href="#pivot">Philosophy</a></li>
       <li><a href="#projects">Work</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#career">Career</a></li>
@@ -1044,14 +1045,14 @@
       </div>
       <h1 class="hero-name">Girijesh Singh</h1>
       <div class="hero-role">
-        Lead Data Scientist
+        Architecting Enterprise GenAI
         <span class="sep"></span>
-        Applied AI Architect
+        for High-Stakes Environments
         <span class="sep"></span>
         Waterloo, ON
       </div>
       <p class="hero-tagline">
-        I build AI systems that work <strong>in the real world</strong> — where hallucinations carry legal consequences, latency costs millions, and production scale is non-negotiable.
+        I build production-grade AI systems where <strong>hallucinations carry legal consequences</strong>, latency costs millions, and scale is non-negotiable. Currently driving $10M+ in operational efficiency as a Lead Data Scientist.
       </p>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary">View My Work ↓</a>
@@ -1174,6 +1175,33 @@
   <div class="glow-line"></div>
 
   <!-- ============================================================
+       THE GENAIAI PIVOT
+  ============================================================ -->
+  <section id="pivot" style="background: var(--bg);">
+    <div class="container">
+      <div class="reveal" style="max-width: 780px;">
+        <div class="section-label">Technical Philosophy</div>
+        <h2 class="section-title">Why I Stopped Using LangChain<br>for Enterprise RAG</h2>
+        <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 20px;">
+          <p style="font-size: 1.05rem; color: var(--text-2); line-height: 1.85;">
+            Moving a Generative AI prototype to a regulated production environment exposes the severe limitations of standard wrapper libraries. Within 30 days of deploying standard RAG on highly interlinked, 100+ page insurance documents, I diagnosed <strong style="color: var(--text-1);">catastrophic context collapse and citation failure</strong>.
+          </p>
+          <p style="font-size: 1.05rem; color: var(--text-2); line-height: 1.85;">
+            My solution wasn't a larger context window — it was a better architecture. I engineered a <strong style="color: var(--text-1);">custom runtime schema transpilation layer</strong> and a hierarchical node retrieval engine from scratch. The result? A system that captures complex cross-references without hallucinations, dynamically scaling to thousands of users while keeping cloud costs flat.
+          </p>
+          <div style="padding: 24px 28px; background: var(--surface); border: 1px solid rgba(139,92,246,0.2); border-left: 3px solid var(--purple); border-radius: 12px; margin-top: 8px;">
+            <p style="font-size: 0.95rem; color: var(--text-2); line-height: 1.75; font-style: italic;">
+              "The best GenAI architecture isn't the one with the most features — it's the one that can provably tell you <strong style="color: var(--purple-light); font-style: normal;">exactly why it gave the answer it did</strong>, every single time."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-line"></div>
+
+  <!-- ============================================================
        IMPACT NUMBERS
   ============================================================ -->
   <section id="impact">
@@ -1238,32 +1266,32 @@
             <div class="pc-icon pc-icon-purple">🏗️</div>
             <span class="pc-status ps-nda">PRODUCTION · NDA</span>
           </div>
-          <div class="pc-title">Enterprise Insurance AI Platform</div>
-          <div class="pc-meta">Lead Data Scientist · 2024–Present · Confidential Employer</div>
+          <div class="pc-title">CoverAI: Zero-Hallucination Retrieval Engine</div>
+          <div class="pc-meta">Lead Data Scientist &amp; Applied AI Architect · 2024–Present · Confidential Employer</div>
           <div class="pc-desc">
-            End-to-end enterprise RAG platform that reduces insurance policy review from 30–45 minutes to under 30 seconds. Built on a <strong style="color:var(--text-1)">custom hierarchical retrieval architecture</strong> — no LangChain, no LlamaIndex — designed from scratch to handle multi-document, cross-referencing insurance policies (up to 700 pages) at enterprise scale across 4 global regions. Covers the full adjuster workflow: multi-engine document ingestion, coverage Q&A with pinpoint citation validation (hallucinations eliminated before reaching users), coverage verdict generation, and automated letter population. New insurance carriers onboard through configuration alone — zero code changes.
+            Architected a 3-service Generative AI microservice architecture processing 30,000+ daily queries for 2,000+ enterprise users globally. Deprecated generic off-the-shelf LangChain setups in favour of a <strong style="color:var(--text-1)">custom hierarchical node-based JSON tree retrieval system</strong> to completely eliminate context collapse across 700+ page legal documents. Built deterministic, real-time citation validation that streams output character-by-character to guarantee zero ungrounded references. New carriers onboard via config — zero code changes.
           </div>
           <div class="pc-metrics">
+            <div class="pm-item"><div class="pm-val">10×</div><div class="pm-lbl">Latency (7.5s → 0.7s)</div></div>
+            <div class="pm-item"><div class="pm-val">&lt;30s</div><div class="pm-lbl">End-to-End (was 2.5min)</div></div>
+            <div class="pm-item"><div class="pm-val">$500K+</div><div class="pm-lbl">Cloud Costs Avoided</div></div>
             <div class="pm-item"><div class="pm-val">2,000+</div><div class="pm-lbl">Active Users</div></div>
             <div class="pm-item"><div class="pm-val">30K+</div><div class="pm-lbl">Daily Queries</div></div>
-            <div class="pm-item"><div class="pm-val">10×</div><div class="pm-lbl">Latency Gain</div></div>
-            <div class="pm-item"><div class="pm-val">20×</div><div class="pm-lbl">Throughput</div></div>
-            <div class="pm-item"><div class="pm-val">$10M+</div><div class="pm-lbl">Annual Savings</div></div>
-            <div class="pm-item"><div class="pm-val">4</div><div class="pm-lbl">Regions</div></div>
+            <div class="pm-item"><div class="pm-val">4</div><div class="pm-lbl">Global Regions</div></div>
           </div>
           <div class="pc-tags">
-            <span class="pt pt-purple">Custom RAG</span>
-            <span class="pt pt-purple">Hierarchical Retrieval</span>
-            <span class="pt pt-purple">Graph Execution Engine</span>
-            <span class="pt pt-cyan">GPT-4o</span>
-            <span class="pt pt-cyan">Azure OpenAI</span>
+            <span class="pt pt-purple">PydanticAI</span>
+            <span class="pt pt-purple">FastMCP</span>
+            <span class="pt pt-purple">Hierarchical Node Retrieval</span>
+            <span class="pt pt-cyan">Azure Cosmos DB (IVF)</span>
+            <span class="pt pt-cyan">Azure OpenAI / GPT-4o</span>
             <span class="pt pt-cyan">Microservices</span>
+            <span class="pt pt-amber">Real-Time Citation Validation</span>
             <span class="pt pt-amber">Adobe PDF Services</span>
-            <span class="pt pt-amber">Tesseract OCR</span>
             <span class="pt pt-gray">FastAPI</span>
-            <span class="pt pt-gray">PostgreSQL</span>
-            <span class="pt pt-gray">MongoDB</span>
+            <span class="pt pt-gray">OpenTelemetry</span>
             <span class="pt pt-gray">Azure Service Bus</span>
+            <span class="pt pt-gray">Arize Phoenix</span>
           </div>
         </div>
 
@@ -1273,22 +1301,23 @@
             <div class="pc-icon pc-icon-amber">⚡</div>
             <span class="pc-status ps-prod">PRODUCTION</span>
           </div>
-          <div class="pc-title">FNOL Claim Classification System</div>
-          <div class="pc-meta">Sole ML Engineer · 2018–2021 · Confidential Employer</div>
+          <div class="pc-title">Autonomous Multi-Line Claims Routing</div>
+          <div class="pc-meta">ML Engineer / Lead · 2018–2021 · Confidential Employer</div>
           <div class="pc-desc">
-            First Notice of Loss (FNOL) classification agent for a major US insurance carrier. Sole ML engineer — owned model development, client interaction, and deployment. Automated routing of 200–300 incoming insurance claims per day to the correct claim type and adjuster team. CTO called it the best thing any dedicated team had built.
+            Led a 5-person engineering squad to design and deploy a human-in-the-loop ML architecture for autonomous insurance claim routing. Navigated strict regulatory constraints by ensuring routing logic remained 100% explainable via <strong style="color:var(--text-1)">SHAP values at the feature level</strong>. Automated routing of 200–300 claims per day. CTO called it the best thing any dedicated team had built.
           </div>
           <div class="pc-metrics">
-            <div class="pm-item"><div class="pm-val">30%</div><div class="pm-lbl">Labor Reduction</div></div>
-            <div class="pm-item"><div class="pm-val">45%</div><div class="pm-lbl">Cost Reduction</div></div>
+            <div class="pm-item"><div class="pm-val">45%</div><div class="pm-lbl">Routing Cost Reduction</div></div>
+            <div class="pm-item"><div class="pm-val">$200K</div><div class="pm-lbl">Annual Savings</div></div>
             <div class="pm-item"><div class="pm-val">35%</div><div class="pm-lbl">Faster Settlement</div></div>
           </div>
           <div class="pc-tags">
             <span class="pt pt-amber">XGBoost</span>
-            <span class="pt pt-gray">Scikit-learn</span>
-            <span class="pt pt-gray">Python</span>
-            <span class="pt pt-cyan">Insurance ML</span>
-            <span class="pt pt-gray">Interactive Dashboard</span>
+            <span class="pt pt-amber">SHAP</span>
+            <span class="pt pt-gray">Django</span>
+            <span class="pt pt-gray">RabbitMQ</span>
+            <span class="pt pt-cyan">Human-in-the-Loop</span>
+            <span class="pt pt-gray">Explainable ML</span>
           </div>
         </div>
 
@@ -1298,18 +1327,18 @@
             <div class="pc-icon pc-icon-cyan">🔤</div>
             <span class="pc-status ps-int">INTERNAL PRODUCT</span>
           </div>
-          <div class="pc-title">PriML — Natural Language to SQL</div>
+          <div class="pc-title">PriML: Natural Language Business Intelligence</div>
           <div class="pc-meta">Team of 10 · 2018–2021 · Pre-LLM Era</div>
           <div class="pc-desc">
-            Before LLMs existed, built an NL-to-SQL product for insurance domain data. Fine-tuned Rat-SQL to handle the complex multi-table, multi-JOIN queries specific to insurance schemas. NL queries flowed into SQL, hit the database, and auto-generated interactive dashboards — demoed to external clients.
+            Designed an NL-to-SQL analytics product outperforming dedicated vendor solutions. Fine-tuned Rat-SQL models to parse complex multi-table JOINs across <strong style="color:var(--text-1)">50+ diverse relational schemas</strong>, achieving 87% zero-shot accuracy and eliminating 3-day BI reporting SLAs. NL queries flowed into SQL, hit the database, and auto-generated Plotly dashboards — demoed to external clients.
           </div>
           <div class="pc-tags">
-            <span class="pt pt-purple">Rat-SQL</span>
+            <span class="pt pt-purple">Transformers (Rat-SQL)</span>
             <span class="pt pt-purple">Fine-tuning</span>
-            <span class="pt pt-cyan">NLP</span>
-            <span class="pt pt-gray">Python</span>
+            <span class="pt pt-cyan">87% Zero-Shot Accuracy</span>
+            <span class="pt pt-gray">Plotly/Dash</span>
+            <span class="pt pt-gray">Django</span>
             <span class="pt pt-gray">PostgreSQL</span>
-            <span class="pt pt-gray">Auto-Dashboard</span>
           </div>
         </div>
 
@@ -1319,17 +1348,17 @@
             <div class="pc-icon pc-icon-green">📄</div>
             <span class="pc-status ps-pub">PUBLISHED · PST 2023</span>
           </div>
-          <div class="pc-title">Privacy-Preserving ML for Brain-Computer Interfaces</div>
+          <div class="pc-title">Selective EEG Signal Anonymization using Multi-Objective Autoencoders</div>
           <div class="pc-meta">Research · Lakehead University · Copenhagen, Denmark · 2023</div>
           <div class="pc-desc">
-            Published at the 20th IEEE International Conference on Privacy, Security and Trust (PST 2023) in Copenhagen. Proposes a framework for privacy-preserving machine learning applied to BCI neural data — preventing re-identification of sensitive brain activity signals while preserving model utility.
+            Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective EEG anonymization — preserving clinically relevant signal components while eliminating re-identification vectors. Published at PST 2023, Copenhagen.
           </div>
           <div class="pc-tags">
-            <span class="pt pt-amber">Differential Privacy</span>
-            <span class="pt pt-amber">BCIs</span>
+            <span class="pt pt-amber">Multi-Objective Autoencoders</span>
+            <span class="pt pt-amber">EEG / BCIs</span>
             <span class="pt pt-gray">PyTorch</span>
             <span class="pt pt-gray">Published Research</span>
-            <span class="pt pt-cyan">IEEE PST 2023</span>
+            <span class="pt pt-cyan">PST 2023 · Copenhagen</span>
           </div>
         </div>
 
@@ -1351,62 +1380,61 @@
       </div>
       <div class="skills-grid reveal reveal-d1">
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">🤖</span> LLMs &amp; Generative AI</div>
+          <div class="skill-cat-title"><span class="cat-icon">🤖</span> GenAI &amp; Orchestration</div>
           <div class="chips">
-            <span class="chip expert">Custom RAG Architecture</span>
-            <span class="chip expert">GPT-4o / Azure OpenAI</span>
-            <span class="chip expert">Hierarchical Retrieval</span>
+            <span class="chip expert">PydanticAI</span>
+            <span class="chip expert">FastMCP</span>
+            <span class="chip expert">Hierarchical Node Retrieval</span>
+            <span class="chip expert">Real-Time Citation Validation</span>
+            <span class="chip">Neural Reranking (Cohere)</span>
+            <span class="chip">Azure OpenAI / GPT-4o</span>
             <span class="chip">Prompt Engineering</span>
             <span class="chip">Embedding Models</span>
-            <span class="chip">Citation Validation</span>
-            <span class="chip">Multi-Document QA</span>
-            <span class="chip">LangChain</span>
-            <span class="chip">LlamaIndex</span>
-            <span class="chip">Pydantic Output Schemas</span>
+            <span class="chip">Semantic Search</span>
+            <span class="chip">LangChain / LlamaIndex</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">📊</span> ML &amp; Data Science</div>
+          <div class="skill-cat-title"><span class="cat-icon">📊</span> Core Machine Learning</div>
           <div class="chips">
             <span class="chip expert">Python</span>
-            <span class="chip expert">SQL</span>
             <span class="chip expert">XGBoost</span>
-            <span class="chip expert">Scikit-learn</span>
+            <span class="chip expert">SHAP (Explainability)</span>
             <span class="chip">PyTorch</span>
-            <span class="chip">PySpark</span>
-            <span class="chip">Feature Engineering</span>
-            <span class="chip">Statistical Modeling</span>
-            <span class="chip">Anomaly Detection</span>
+            <span class="chip">Transformers</span>
+            <span class="chip">Scikit-learn</span>
+            <span class="chip">Time Series (Prophet)</span>
+            <span class="chip">Semantic Search</span>
             <span class="chip">NLP / Fine-tuning</span>
+            <span class="chip">SQL</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">☁️</span> Infrastructure &amp; Engineering</div>
+          <div class="skill-cat-title"><span class="cat-icon">☁️</span> Data Engineering &amp; Cloud Scaling</div>
           <div class="chips">
-            <span class="chip expert">Azure</span>
-            <span class="chip expert">FastAPI</span>
-            <span class="chip">Docker</span>
+            <span class="chip expert">Azure Cosmos DB (IVF Indexing)</span>
+            <span class="chip expert">Azure Service Bus</span>
+            <span class="chip expert">PySpark</span>
+            <span class="chip">RabbitMQ</span>
+            <span class="chip">Azure Blob Storage</span>
             <span class="chip">PostgreSQL</span>
             <span class="chip">MongoDB</span>
-            <span class="chip">Redis</span>
-            <span class="chip">Azure Service Bus</span>
-            <span class="chip">Azure Blob Storage</span>
+            <span class="chip">Docker</span>
             <span class="chip">Microservices</span>
-            <span class="chip">REST APIs</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">🛠️</span> Domain &amp; Leadership</div>
+          <div class="skill-cat-title"><span class="cat-icon">🚀</span> Deployment &amp; Observability</div>
           <div class="chips">
-            <span class="chip expert">Insurance Domain (6 yrs)</span>
+            <span class="chip expert">FastAPI</span>
+            <span class="chip expert">OpenTelemetry</span>
             <span class="chip expert">Team Leadership (10–14)</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Arize Phoenix</span>
             <span class="chip">Adobe PDF Services API</span>
-            <span class="chip">Tesseract OCR</span>
-            <span class="chip">GPT-4o Vision API</span>
-            <span class="chip">DAG Orchestration</span>
-            <span class="chip">Observability</span>
+            <span class="chip">Django</span>
+            <span class="chip">Insurance Domain (6 yrs)</span>
             <span class="chip">Stakeholder Management</span>
-            <span class="chip">Git</span>
           </div>
         </div>
       </div>
@@ -1490,11 +1518,19 @@
         <div class="section-label">Research</div>
         <h2 class="section-title">Publications</h2>
       </div>
-      <div class="research-card reveal reveal-d1">
-        <div class="research-badge">📚 Peer-Reviewed · International Conference</div>
-        <div class="research-title">Privacy-Preserving Machine Learning Framework for Brain-Computer Interfaces</div>
-        <div class="research-venue">20th IEEE International Conference on Privacy, Security and Trust (PST 2023) · Copenhagen, Denmark</div>
-        <div class="research-desc">Addresses critical re-identification risks in neural data processing. Proposes a framework that applies privacy-preserving techniques to BCI machine learning pipelines — preventing re-identification of sensitive brain activity data while maintaining model utility across tasks. Supervised by Dr. Garima Bajwa, Department of Computer Science, Lakehead University, Thunder Bay, ON.</div>
+      <div style="display: flex; flex-direction: column; gap: 20px; max-width: 780px;">
+        <div class="research-card reveal reveal-d1">
+          <div class="research-badge">📚 Peer-Reviewed · International Conference</div>
+          <div class="research-title">Selective EEG Signal Anonymization using Multi-Objective Autoencoders</div>
+          <div class="research-venue">20th International Conference on Privacy, Security and Trust (PST 2023) · Copenhagen, Denmark</div>
+          <div class="research-desc">Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective anonymization of EEG signals — preserving clinically relevant signal components while eliminating re-identification vectors. Supervised by Dr. Garima Bajwa, Lakehead University, Thunder Bay, ON.</div>
+        </div>
+        <div class="research-card reveal reveal-d2" style="--amber: #f59e0b;">
+          <div class="research-badge">📚 Peer-Reviewed · Springer</div>
+          <div class="research-title">In-Memory Computation for Real-time Face Recognition</div>
+          <div class="research-venue">International Conference on Inventive Computation Technologies (ICICT 2019) · Springer</div>
+          <div class="research-desc">Published research on optimizing edge-compute inference times for computer vision models. Demonstrates in-memory computation strategies that significantly reduce latency for real-time face recognition workloads on resource-constrained hardware.</div>
+        </div>
       </div>
     </div>
   </section>
