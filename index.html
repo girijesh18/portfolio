@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Girijesh Singh — Lead Data Scientist & Applied AI Architect</title>
+  <title>Girijesh Singh - Lead Data Scientist & Applied AI Architect</title>
   <meta name="description" content="Lead Data Scientist and Applied AI Architect. 6 years building production AI for the insurance industry. 2,000+ users, 30K+ daily queries, $10M+ impact.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -983,9 +983,92 @@
     .footer-text span { color: var(--purple-light); font-weight: 600; }
 
     /* =============================================
+       VALUE CARDS (What I Bring to the Table)
+    ============================================= */
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      border-color: rgba(139,92,246,0.28);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 40px rgba(139,92,246,0.06);
+    }
+    .vc-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 18px;
+      opacity: 0.55;
+    }
+    .vc-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.35;
+    }
+    .vc-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       PROJECT PROBLEM/BUILD/ROI FORMAT
+    ============================================= */
+    .pc-pbr {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 22px;
+    }
+    .pc-pbr-row {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.72;
+    }
+    .pc-pbr-label {
+      font-weight: 700;
+      color: var(--text-1);
+      margin-right: 5px;
+    }
+    .pc-roi-list {
+      margin-top: 4px;
+      padding: 14px 18px;
+      background: rgba(139,92,246,0.04);
+      border: 1px solid rgba(139,92,246,0.14);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .pc-roi-item {
+      font-size: 0.86rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .pc-roi-item strong { color: var(--text-1); }
+
+    /* =============================================
        RESPONSIVE
     ============================================= */
     @media (max-width: 900px) {
+      .value-grid { grid-template-columns: 1fr; gap: 16px; }
       .thread-grid { grid-template-columns: 1fr; gap: 36px; }
       .thread-line { display: none; }
       .thread-node { padding-left: 0; padding-right: 0; }
@@ -1020,7 +1103,7 @@
       GS <span class="logo-accent">// Portfolio</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#thread">Story</a></li>
+      <li><a href="#thread">Value</a></li>
       <li><a href="#pivot">Philosophy</a></li>
       <li><a href="#projects">Work</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -1090,83 +1173,31 @@
   <div class="glow-line"></div>
 
   <!-- ============================================================
-       THE 6-YEAR THREAD
+       WHAT I BRING TO THE TABLE
   ============================================================ -->
   <section id="thread">
     <div class="container">
       <div class="thread-header reveal">
-        <div class="section-label">The Moat</div>
-        <h2 class="section-title">The 6-Year Thread</h2>
-        <p class="section-sub">Most engineers change companies and domains. I stayed with the same core problem for six years and solved it with progressively more powerful technology. That's rare — and hard to replicate.</p>
+        <div class="section-label">What I Bring</div>
+        <h2 class="section-title">What I Bring to the Table</h2>
+        <p class="section-sub">Three things that separate a production AI architect from someone who can run a notebook.</p>
       </div>
 
-      <div class="thread-grid reveal reveal-d1" id="threadGrid">
-        <div class="thread-line" aria-hidden="true"></div>
-
-        <!-- Node 1 -->
-        <div class="thread-node" onclick="toggleNode(this)" role="button" tabindex="0" aria-expanded="false">
-          <div class="tn-dot-wrap">
-            <div class="tn-dot"></div>
-            <div class="tn-ring"></div>
-          </div>
-          <div class="tn-year">2018</div>
-          <div class="tn-era">Pre-LLM Era</div>
-          <div class="tn-title">NL-to-SQL</div>
-          <div class="tn-desc">Before LLMs existed — fine-tuned Rat-SQL to translate insurance adjuster questions into complex SQL, automatically generating interactive dashboards from results.</div>
-          <div class="tn-expand">
-            <div class="tn-bullet">Fine-tuned Rat-SQL to handle complex JOINs &amp; WHERE clauses specific to insurance-domain schemas</div>
-            <div class="tn-bullet">End-to-end pipeline: Natural Language → SQL → Database → auto-generated interactive dashboard</div>
-            <div class="tn-bullet">Team of 10 — owned full design, development, and maintenance lifecycle</div>
-            <div class="tn-bullet">Demoed to external insurance clients; adopted internally at scale</div>
-            <div class="tn-tags">
-              <span class="tn-tag">Python</span><span class="tn-tag">Rat-SQL</span><span class="tn-tag">NLP</span><span class="tn-tag">PostgreSQL</span>
-            </div>
-          </div>
-          <div class="tn-toggle">Click to expand ↕</div>
+      <div class="value-grid reveal reveal-d1">
+        <div class="value-card">
+          <div class="vc-num">01</div>
+          <h3 class="vc-title">Zero-to-One GenAI Architecture</h3>
+          <p class="vc-desc">I don't just prompt-engineer; I build deterministic, multi-agent microservices from scratch. When off-the-shelf tools like LangChain fail at scale, I design custom orchestration layers (PydanticAI, FastMCP) that actually work in production.</p>
         </div>
-
-        <!-- Node 2 -->
-        <div class="thread-node" onclick="toggleNode(this)" role="button" tabindex="0" aria-expanded="false">
-          <div class="tn-dot-wrap">
-            <div class="tn-dot"></div>
-            <div class="tn-ring"></div>
-          </div>
-          <div class="tn-year">2023</div>
-          <div class="tn-era">LLM Agent Era</div>
-          <div class="tn-title">LLM Agents → Custom Architecture</div>
-          <div class="tn-desc">Built with LangChain, diagnosed its limits in 30 days, redesigned the entire architecture solo. Then cut latency from 2.5 minutes to 40 seconds — in three weeks.</div>
-          <div class="tn-expand">
-            <div class="tn-bullet">LangChain broke on multi-document insurance policies — no pinpoint citations, cross-document context collapse</div>
-            <div class="tn-bullet">Proposed scrapping LangChain entirely. Delivered replacement architecture solo in 3 months (one colleague pressure-tested)</div>
-            <div class="tn-bullet">Latency crisis resolved: 2.5 min → 40 sec via single-trip retrieval redesign + LLM calls reduced 5→2</div>
-            <div class="tn-bullet">This architecture became the production foundation for everything that followed</div>
-            <div class="tn-tags">
-              <span class="tn-tag">LangChain</span><span class="tn-tag">GPT-4</span><span class="tn-tag">Custom RAG</span><span class="tn-tag">FastAPI</span>
-            </div>
-          </div>
-          <div class="tn-toggle">Click to expand ↕</div>
+        <div class="value-card">
+          <div class="vc-num">02</div>
+          <h3 class="vc-title">High-Performance System Optimization</h3>
+          <p class="vc-desc">I bridge the gap between Data Science and Data Engineering. I optimize vector indices (Azure Cosmos DB IVF) to slash query latencies from minutes to seconds, circumventing hundreds of thousands in cloud scale-out costs.</p>
         </div>
-
-        <!-- Node 3 (default open) -->
-        <div class="thread-node tn-active" onclick="toggleNode(this)" role="button" tabindex="0" aria-expanded="true">
-          <div class="tn-dot-wrap">
-            <div class="tn-dot"></div>
-            <div class="tn-ring"></div>
-          </div>
-          <div class="tn-year">2024</div>
-          <div class="tn-era">Enterprise Platform Era</div>
-          <div class="tn-title">Enterprise RAG Platform</div>
-          <div class="tn-desc">Custom hierarchical retrieval. No framework dependencies. 4 global regions. 2,000+ active users. New carriers onboarded through configuration alone — zero code.</div>
-          <div class="tn-expand">
-            <div class="tn-bullet">Sections → subsections → bullets → node numbers → network retrieval (proprietary hierarchy)</div>
-            <div class="tn-bullet">Real-time citation validation — hallucinated sources eliminated character-by-character before reaching users</div>
-            <div class="tn-bullet">Graph-based execution engine: new insurance carriers onboarded via config, zero code changes required</div>
-            <div class="tn-bullet">10× latency reduction, 20× throughput gain, $10M+ estimated annual savings in adjuster time</div>
-            <div class="tn-tags">
-              <span class="tn-tag">Azure OpenAI</span><span class="tn-tag">GPT-4o</span><span class="tn-tag">Microservices</span><span class="tn-tag">Adobe PDF API</span>
-            </div>
-          </div>
-          <div class="tn-toggle">Click to collapse ↕</div>
+        <div class="value-card">
+          <div class="vc-num">03</div>
+          <h3 class="vc-title">Measurable Enterprise Impact</h3>
+          <p class="vc-desc">My architectures don't just live in notebooks. I've directed teams of 14+ engineers to deploy systems that drive $10M+ in operational efficiency and process tens of thousands of queries daily across 4 global regions.</p>
         </div>
       </div>
     </div>
@@ -1187,11 +1218,11 @@
             Moving a Generative AI prototype to a regulated production environment exposes the severe limitations of standard wrapper libraries. Within 30 days of deploying standard RAG on highly interlinked, 100+ page insurance documents, I diagnosed <strong style="color: var(--text-1);">catastrophic context collapse and citation failure</strong>.
           </p>
           <p style="font-size: 1.05rem; color: var(--text-2); line-height: 1.85;">
-            My solution wasn't a larger context window — it was a better architecture. I engineered a <strong style="color: var(--text-1);">custom runtime schema transpilation layer</strong> and a hierarchical node retrieval engine from scratch. The result? A system that captures complex cross-references without hallucinations, dynamically scaling to thousands of users while keeping cloud costs flat.
+            My solution wasn't a larger context window - it was a better architecture. I engineered a <strong style="color: var(--text-1);">custom runtime schema transpilation layer</strong> and a hierarchical node retrieval engine from scratch. The result? A system that captures complex cross-references without hallucinations, dynamically scaling to thousands of users while keeping cloud costs flat.
           </p>
           <div style="padding: 24px 28px; background: var(--surface); border: 1px solid rgba(139,92,246,0.2); border-left: 3px solid var(--purple); border-radius: 12px; margin-top: 8px;">
             <p style="font-size: 0.95rem; color: var(--text-2); line-height: 1.75; font-style: italic;">
-              "The best GenAI architecture isn't the one with the most features — it's the one that can provably tell you <strong style="color: var(--purple-light); font-style: normal;">exactly why it gave the answer it did</strong>, every single time."
+              "The best GenAI architecture isn't the one with the most features - it's the one that can provably tell you <strong style="color: var(--purple-light); font-style: normal;">exactly why it gave the answer it did</strong>, every single time."
             </p>
           </div>
         </div>
@@ -1209,38 +1240,38 @@
       <div class="impact-header reveal">
         <div class="section-label">By the Numbers</div>
         <h2 class="section-title">Real Impact at Scale</h2>
-        <p class="section-sub" style="margin: 0 auto;">Production AI in a regulated, high-stakes industry — every number below is earned, not estimated from a demo.</p>
+        <p class="section-sub" style="margin: 0 auto;">Production AI in a regulated, high-stakes industry - every number below is earned, not estimated from a demo.</p>
       </div>
       <div class="impact-grid reveal reveal-d1">
         <div class="impact-cell">
-          <div class="ic-value" data-target="2000" data-suffix="+">—</div>
+          <div class="ic-value" data-target="2000" data-suffix="+">-</div>
           <div class="ic-label">Active Users</div>
           <div class="ic-sub">Insurance adjusters · US · UK · AU · EU</div>
         </div>
         <div class="impact-cell">
-          <div class="ic-value" data-target="30" data-suffix="K+">—</div>
+          <div class="ic-value" data-target="30" data-suffix="K+">-</div>
           <div class="ic-label">Daily AI Queries</div>
           <div class="ic-sub">Multi-carrier, multi-tenant platform</div>
         </div>
         <div class="impact-cell">
-          <div class="ic-value" data-target="10" data-suffix="×">—</div>
+          <div class="ic-value" data-target="10" data-suffix="×">-</div>
           <div class="ic-label">Latency Reduction</div>
           <div class="ic-sub">Hours of manual work → under 30 seconds</div>
         </div>
         <div class="impact-cell">
-          <div class="ic-value" data-prefix="$" data-target="10" data-suffix="M+">—</div>
+          <div class="ic-value" data-prefix="$" data-target="10" data-suffix="M+">-</div>
           <div class="ic-label">Est. Annual Savings</div>
           <div class="ic-sub">In insurance adjuster time costs</div>
         </div>
         <div class="impact-cell">
-          <div class="ic-value" data-target="4">—</div>
+          <div class="ic-value" data-target="4">-</div>
           <div class="ic-label">Global Regions</div>
           <div class="ic-sub">US · UK · Australia · EU deployment</div>
         </div>
         <div class="impact-cell">
-          <div class="ic-value" data-target="12" data-suffix=" mo">—</div>
-          <div class="ic-label">Time to Promotion</div>
-          <div class="ic-sub">Senior → Lead Data Scientist</div>
+          <div class="ic-value" data-target="20" data-suffix="×">-</div>
+          <div class="ic-label">Throughput Gain</div>
+          <div class="ic-sub">More queries handled - zero added cloud cost</div>
         </div>
       </div>
     </div>
@@ -1256,7 +1287,7 @@
       <div class="projects-header reveal">
         <div class="section-label">Featured Work</div>
         <h2 class="section-title">What I've Built</h2>
-        <p class="section-sub">Production systems, published research, and shipped products — not demos. Everything here is real and has been used at scale.</p>
+        <p class="section-sub">Production systems, published research, and shipped products - not demos. Everything here is real and has been used at scale.</p>
       </div>
       <div class="projects-grid">
 
@@ -1268,8 +1299,15 @@
           </div>
           <div class="pc-title">CoverAI: Zero-Hallucination Retrieval Engine</div>
           <div class="pc-meta">Lead Data Scientist &amp; Applied AI Architect · 2024–Present · Confidential Employer</div>
-          <div class="pc-desc">
-            Architected a 3-service Generative AI microservice architecture processing 30,000+ daily queries for 2,000+ enterprise users globally. Deprecated generic off-the-shelf LangChain setups in favour of a <strong style="color:var(--text-1)">custom hierarchical node-based JSON tree retrieval system</strong> to completely eliminate context collapse across 700+ page legal documents. Built deterministic, real-time citation validation that streams output character-by-character to guarantee zero ungrounded references. New carriers onboard via config — zero code changes.
+          <div class="pc-pbr">
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Problem:</span>Moving off-the-shelf LangChain RAG into production on 700+ page interlinked legal documents led to catastrophic context collapse and hallucinations - with real legal and financial consequences.</div>
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Build:</span>Engineered a custom <strong style="color:var(--text-1)">hierarchical node-based JSON tree retrieval system</strong> with a runtime schema transpilation layer. Deterministic citation validation streams output character-by-character - zero ungrounded references reach users. New carriers onboard via config, zero code changes.</div>
+            <div class="pc-roi-list">
+              <div class="pc-roi-item">🔥 <strong>Scale:</strong> Processed 30,000+ daily queries for 2,000+ global enterprise users</div>
+              <div class="pc-roi-item">⚡ <strong>Speed:</strong> Optimized IVF indexing slashed latency 10x (7.5s to 0.7s), end-to-end under 30s</div>
+              <div class="pc-roi-item">🛡️ <strong>Safety:</strong> 100% real-time citation validation - zero hallucinated references in production</div>
+              <div class="pc-roi-item">💰 <strong>Cost:</strong> Circumvented $500K+ in projected cloud scale-out costs via index-level optimization</div>
+            </div>
           </div>
           <div class="pc-metrics">
             <div class="pm-item"><div class="pm-val">10×</div><div class="pm-lbl">Latency (7.5s → 0.7s)</div></div>
@@ -1303,8 +1341,13 @@
           </div>
           <div class="pc-title">Autonomous Multi-Line Claims Routing</div>
           <div class="pc-meta">ML Engineer / Lead · 2018–2021 · Confidential Employer</div>
-          <div class="pc-desc">
-            Led a 5-person engineering squad to design and deploy a human-in-the-loop ML architecture for autonomous insurance claim routing. Navigated strict regulatory constraints by ensuring routing logic remained 100% explainable via <strong style="color:var(--text-1)">SHAP values at the feature level</strong>. Automated routing of 200–300 claims per day. CTO called it the best thing any dedicated team had built.
+          <div class="pc-pbr">
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Problem:</span>Multi-line insurance claims were manually routed, costing excessive time and money while lacking the auditability regulators required.</div>
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Build:</span>Designed an explainable, human-in-the-loop <strong style="color:var(--text-1)">XGBoost architecture</strong> that autonomously assessed claims based on cost, history, and location. Kept 100% regulatory compliance using <strong style="color:var(--text-1)">SHAP values at the feature level</strong>. CTO: "No dedicated team has ever built anything like this."</div>
+            <div class="pc-roi-list">
+              <div class="pc-roi-item">📉 <strong>Impact:</strong> Handled 300+ daily claims with 45% reduction in routing costs (~$200K annual savings)</div>
+              <div class="pc-roi-item">⚡ <strong>Speed:</strong> Accelerated claim settlements by 35% - adjusters moved from manual triage to high-value decisions</div>
+            </div>
           </div>
           <div class="pc-metrics">
             <div class="pm-item"><div class="pm-val">45%</div><div class="pm-lbl">Routing Cost Reduction</div></div>
@@ -1329,8 +1372,13 @@
           </div>
           <div class="pc-title">PriML: Natural Language Business Intelligence</div>
           <div class="pc-meta">Team of 10 · 2018–2021 · Pre-LLM Era</div>
-          <div class="pc-desc">
-            Designed an NL-to-SQL analytics product outperforming dedicated vendor solutions. Fine-tuned Rat-SQL models to parse complex multi-table JOINs across <strong style="color:var(--text-1)">50+ diverse relational schemas</strong>, achieving 87% zero-shot accuracy and eliminating 3-day BI reporting SLAs. NL queries flowed into SQL, hit the database, and auto-generated Plotly dashboards — demoed to external clients.
+          <div class="pc-pbr">
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Problem:</span>Non-technical stakeholders were waiting up to 3 days for custom BI reporting due to complex multi-table JOINs across <strong style="color:var(--text-1)">50+ diverse relational schemas</strong>.</div>
+            <div class="pc-pbr-row"><span class="pc-pbr-label">The Build:</span>Fine-tuned Microsoft's Rat-SQL transformer model via a Django/RabbitMQ backend. Built an end-to-end pipeline: Natural Language query → SQL → Database → auto-generated Plotly dashboard. Demoed to external insurance clients; adopted internally.</div>
+            <div class="pc-roi-list">
+              <div class="pc-roi-item">🎯 <strong>Accuracy:</strong> 87% zero-shot accuracy on complex multi-table JOINs - before LLMs existed</div>
+              <div class="pc-roi-item">⏱️ <strong>Speed:</strong> Eliminated the 3-day BI reporting SLA - stakeholders got answers in seconds, self-serve</div>
+            </div>
           </div>
           <div class="pc-tags">
             <span class="pt pt-purple">Transformers (Rat-SQL)</span>
@@ -1351,7 +1399,7 @@
           <div class="pc-title">Selective EEG Signal Anonymization using Multi-Objective Autoencoders</div>
           <div class="pc-meta">Research · Lakehead University · Copenhagen, Denmark · 2023</div>
           <div class="pc-desc">
-            Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective EEG anonymization — preserving clinically relevant signal components while eliminating re-identification vectors. Published at PST 2023, Copenhagen.
+            Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective EEG anonymization - preserving clinically relevant signal components while eliminating re-identification vectors. Published at PST 2023, Copenhagen.
           </div>
           <div class="pc-tags">
             <span class="pt pt-amber">Multi-Objective Autoencoders</span>
@@ -1380,61 +1428,55 @@
       </div>
       <div class="skills-grid reveal reveal-d1">
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">🤖</span> GenAI &amp; Orchestration</div>
+          <div class="skill-cat-title"><span class="cat-icon">🤖</span> LLM Orchestration</div>
           <div class="chips">
-            <span class="chip expert">PydanticAI</span>
             <span class="chip expert">FastMCP</span>
-            <span class="chip expert">Hierarchical Node Retrieval</span>
+            <span class="chip expert">PydanticAI</span>
             <span class="chip expert">Real-Time Citation Validation</span>
-            <span class="chip">Neural Reranking (Cohere)</span>
+            <span class="chip expert">Hierarchical Node Retrieval</span>
+            <span class="chip">Cohere v3.5 Neural Reranking</span>
             <span class="chip">Azure OpenAI / GPT-4o</span>
-            <span class="chip">Prompt Engineering</span>
             <span class="chip">Embedding Models</span>
             <span class="chip">Semantic Search</span>
-            <span class="chip">LangChain / LlamaIndex</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">📊</span> Core Machine Learning</div>
+          <div class="skill-cat-title"><span class="cat-icon">📊</span> Core ML / AI</div>
           <div class="chips">
-            <span class="chip expert">Python</span>
+            <span class="chip expert">PyTorch</span>
+            <span class="chip expert">Transformers</span>
             <span class="chip expert">XGBoost</span>
             <span class="chip expert">SHAP (Explainability)</span>
-            <span class="chip">PyTorch</span>
-            <span class="chip">Transformers</span>
-            <span class="chip">Scikit-learn</span>
-            <span class="chip">Time Series (Prophet)</span>
-            <span class="chip">Semantic Search</span>
+            <span class="chip">Adobe / GPT-4o Vision OCR</span>
             <span class="chip">NLP / Fine-tuning</span>
-            <span class="chip">SQL</span>
+            <span class="chip">Time Series (Prophet)</span>
+            <span class="chip">Scikit-learn</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">☁️</span> Data Engineering &amp; Cloud Scaling</div>
+          <div class="skill-cat-title"><span class="cat-icon">☁️</span> Data &amp; Scaling</div>
           <div class="chips">
-            <span class="chip expert">Azure Cosmos DB (IVF Indexing)</span>
-            <span class="chip expert">Azure Service Bus</span>
             <span class="chip expert">PySpark</span>
+            <span class="chip expert">Azure Cosmos DB (IVF)</span>
+            <span class="chip expert">Azure Service Bus</span>
             <span class="chip">RabbitMQ</span>
-            <span class="chip">Azure Blob Storage</span>
             <span class="chip">PostgreSQL</span>
+            <span class="chip">Azure Blob Storage</span>
             <span class="chip">MongoDB</span>
             <span class="chip">Docker</span>
-            <span class="chip">Microservices</span>
           </div>
         </div>
         <div class="skill-cat">
-          <div class="skill-cat-title"><span class="cat-icon">🚀</span> Deployment &amp; Observability</div>
+          <div class="skill-cat-title"><span class="cat-icon">🚀</span> Delivery</div>
           <div class="chips">
             <span class="chip expert">FastAPI</span>
             <span class="chip expert">OpenTelemetry</span>
-            <span class="chip expert">Team Leadership (10–14)</span>
-            <span class="chip">Flask</span>
-            <span class="chip">Arize Phoenix</span>
-            <span class="chip">Adobe PDF Services API</span>
+            <span class="chip expert">Arize Phoenix</span>
             <span class="chip">Django</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Adobe PDF Services API</span>
+            <span class="chip">Team Leadership (10-14)</span>
             <span class="chip">Insurance Domain (6 yrs)</span>
-            <span class="chip">Stakeholder Management</span>
           </div>
         </div>
       </div>
@@ -1457,7 +1499,7 @@
 
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-period">Jan 2024 — Present</div>
+          <div class="tl-period">Jan 2024 - Present</div>
           <div class="tl-role">Lead Data Scientist</div>
           <div class="tl-company">Primus Software Corporation</div>
           <div class="tl-location">📍 Waterloo, ON, Canada</div>
@@ -1467,39 +1509,39 @@
 
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-period">Jan 2023 — Jan 2024</div>
+          <div class="tl-period">Jan 2023 - Jan 2024</div>
           <div class="tl-role">Senior Data Scientist</div>
           <div class="tl-company">Primus Software Corporation</div>
           <div class="tl-location">📍 Waterloo, ON, Canada</div>
-          <div class="tl-desc">Diagnosed LangChain's fundamental limits on multi-document insurance policies, proposed scrapping the framework, and designed the hierarchical RAG architecture from scratch — solo — in 3 months. Resolved a latency crisis (2.5 min → 40 sec) through single-trip retrieval redesign and cutting LLM calls from 5 to 2.</div>
+          <div class="tl-desc">Diagnosed LangChain's fundamental limits on multi-document insurance policies, proposed scrapping the framework, and designed the hierarchical RAG architecture from scratch - solo - in 3 months. Resolved a latency crisis (2.5 min → 40 sec) through single-trip retrieval redesign and cutting LLM calls from 5 to 2.</div>
         </div>
 
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-period">Sep 2021 — Apr 2023</div>
+          <div class="tl-period">Sep 2021 - Apr 2023</div>
           <div class="tl-role">M.Sc. Computer Science + Graduate Research Assistant</div>
           <div class="tl-company">Lakehead University</div>
           <div class="tl-location">📍 Thunder Bay, ON, Canada</div>
-          <div class="tl-desc">Project-based Masters, supervised by Dr. Garima Bajwa. Published privacy-preserving ML research for Brain-Computer Interfaces at PST 2023 International Conference (Copenhagen). Continued part-time AI development at Primus Software concurrently — retained due to irreplaceability.</div>
+          <div class="tl-desc">Project-based Masters, supervised by Dr. Garima Bajwa. Published privacy-preserving ML research for Brain-Computer Interfaces at PST 2023 International Conference (Copenhagen). Continued part-time AI development at Primus Software concurrently - retained due to irreplaceability.</div>
           <div class="tl-badge">Published at PST 2023 · Copenhagen, Denmark</div>
         </div>
 
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-period">May — Aug 2022</div>
+          <div class="tl-period">May - Aug 2022</div>
           <div class="tl-role">Data Science Intern</div>
           <div class="tl-company">Ciena</div>
           <div class="tl-location">📍 Ottawa, ON, Canada</div>
-          <div class="tl-desc">PySpark-based data pipelines, divisive clustering, manufacturing batch anomaly detection. Recognized early that the role skewed toward data engineering — confirmed commitment to applied data science path.</div>
+          <div class="tl-desc">PySpark-based data pipelines, divisive clustering, manufacturing batch anomaly detection. Recognized early that the role skewed toward data engineering - confirmed commitment to applied data science path.</div>
         </div>
 
         <div class="tl-item">
           <div class="tl-dot"></div>
-          <div class="tl-period">Jun 2018 — Dec 2022</div>
+          <div class="tl-period">Jun 2018 - Dec 2022</div>
           <div class="tl-role">ML Engineer → Senior ML Engineer</div>
           <div class="tl-company">Primus Software Development</div>
           <div class="tl-location">📍 Noida, India (+ Remote, Canada from 2021)</div>
-          <div class="tl-desc">Built the FNOL classification system for Crawford &amp; Company as sole ML engineer with direct client ownership. Built PriML (NL-to-SQL product) as technical lead on a team of 10. Insurance domain expertise begins here. Retained remotely by Primus after moving to Canada for Masters — a clear signal of value.</div>
+          <div class="tl-desc">Built the FNOL classification system for Crawford &amp; Company as sole ML engineer with direct client ownership. Built PriML (NL-to-SQL product) as technical lead on a team of 10. Insurance domain expertise begins here. Retained remotely by Primus after moving to Canada for Masters - a clear signal of value.</div>
           <div class="tl-badge">CTO recognition + $1,000 performance bonus</div>
         </div>
 
@@ -1523,7 +1565,7 @@
           <div class="research-badge">📚 Peer-Reviewed · International Conference</div>
           <div class="research-title">Selective EEG Signal Anonymization using Multi-Objective Autoencoders</div>
           <div class="research-venue">20th International Conference on Privacy, Security and Trust (PST 2023) · Copenhagen, Denmark</div>
-          <div class="research-desc">Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective anonymization of EEG signals — preserving clinically relevant signal components while eliminating re-identification vectors. Supervised by Dr. Garima Bajwa, Lakehead University, Thunder Bay, ON.</div>
+          <div class="research-desc">Co-authored research on advanced autoencoder architectures for securing sensitive biological telemetry. Proposes selective anonymization of EEG signals - preserving clinically relevant signal components while eliminating re-identification vectors. Supervised by Dr. Garima Bajwa, Lakehead University, Thunder Bay, ON.</div>
         </div>
         <div class="research-card reveal reveal-d2" style="--amber: #f59e0b;">
           <div class="research-badge">📚 Peer-Reviewed · Springer</div>
@@ -1551,7 +1593,7 @@
         <div class="lead-card">
           <div class="lead-icon">🎤</div>
           <div class="lead-title">Toastmasters International</div>
-          <div class="lead-desc">Competitive public speaking training that directly informs how I present technical findings to non-technical stakeholders — executives, clients, and insurance carriers.</div>
+          <div class="lead-desc">Competitive public speaking training that directly informs how I present technical findings to non-technical stakeholders - executives, clients, and insurance carriers.</div>
           <div class="achiev-list">
             <div class="achiev"><span class="achiev-dot"></span>7× Best Impromptu Speaker</div>
             <div class="achiev"><span class="achiev-dot"></span>4× Best Evaluator</div>
@@ -1561,7 +1603,7 @@
         <div class="lead-card">
           <div class="lead-icon">👥</div>
           <div class="lead-title">Cross-Functional Team Lead</div>
-          <div class="lead-desc">Ran day-to-day technical and delivery decisions for a team of 10–14. Direct stakeholder requirement gathering, refinement, and brainstorming. Second-most senior person on the team — manager above, Girijesh ran everything technical below.</div>
+          <div class="lead-desc">Ran day-to-day technical and delivery decisions for a team of 10–14. Direct stakeholder requirement gathering, refinement, and brainstorming. Second-most senior person on the team - manager above, Girijesh ran everything technical below.</div>
           <div class="achiev-list">
             <div class="achiev"><span class="achiev-dot"></span>10–14 person cross-functional team</div>
             <div class="achiev"><span class="achiev-dot"></span>Multi-region, multi-carrier delivery</div>
@@ -1590,8 +1632,9 @@
           <span class="gradient-text">Lead &amp; Staff DS Roles</span>
         </h2>
         <p class="contact-sub">
-          I'm looking for roles where the technical bar is high, the domain is meaningful, and there's real scale to build for.<br>
-          <strong>$190K+ CAD</strong> · Waterloo area or remote · Big Tech, AI-native, Enterprise AI.
+          <strong>Available for $190K+ Lead &amp; Staff DS Roles</strong><br>
+          Waterloo area or remote · Big Tech, AI-native, Enterprise AI<br><br>
+          If your engineering bar is high and you need an architect who thinks in systems rather than just notebooks, let's talk.
         </p>
         <div class="contact-links">
           <a href="mailto:singhgirijesh1996@gmail.com" class="contact-link">
@@ -1672,29 +1715,7 @@
     }, { threshold: 0.4 });
     document.querySelectorAll('.ic-value[data-target]').forEach(el => counterObs.observe(el));
 
-    /* ── 6-Year Thread toggle ── */
-    function toggleNode(node) {
-      const wasActive = node.classList.contains('tn-active');
-      document.querySelectorAll('.thread-node').forEach(n => {
-        n.classList.remove('tn-active');
-        n.setAttribute('aria-expanded', 'false');
-        const toggle = n.querySelector('.tn-toggle');
-        if (toggle) toggle.textContent = 'Click to expand ↕';
-      });
-      if (!wasActive) {
-        node.classList.add('tn-active');
-        node.setAttribute('aria-expanded', 'true');
-        const toggle = node.querySelector('.tn-toggle');
-        if (toggle) toggle.textContent = 'Click to collapse ↕';
-      }
-    }
 
-    /* keyboard support for thread nodes */
-    document.querySelectorAll('.thread-node').forEach(node => {
-      node.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleNode(node); }
-      });
-    });
 
     /* ── Smooth scroll ── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
