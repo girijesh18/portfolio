@@ -1,0 +1,19 @@
+1:"$Sreact.fragment"
+2:I[47420,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+3:I[10880,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+4:I[42724,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+5:I[92349,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+6:I[81371,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+7:I[62196,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+8:I[61010,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+9:I[1344,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+a:I[44413,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+b:I[78369,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+c:I[19508,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+d:I[43464,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+e:I[72939,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+f:I[63971,["/_next/static/chunks/0dbhjjzl8qfwv.js","/_next/static/chunks/135xpw-_9a48o.js"],"default"]
+10:I[97367,["/_next/static/chunks/0dbhjjzl8qfwv.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"children":[["$","$L3",null,{}],["$","div",null,{"style":{"position":"relative","zIndex":1},"children":[["$","$L4",null,{}],["$","$L5",null,{}],["$","$L6",null,{}],["$","$L7",null,{}],["$","$L8",null,{}],["$","$L9",null,{}],["$","$La",null,{}],["$","$Lb",null,{}],["$","$Lc",null,{}],["$","$Ld",null,{}],["$","$Le",null,{}],["$","$Lf",null,{}],["$","footer",null,{"style":{"borderTop":"1px solid var(--border)","padding":"28px 0","textAlign":"center","position":"relative","zIndex":1},"children":["$","p",null,{"style":{"fontSize":".78rem","color":"var(--text-3)"},"children":[["$","strong",null,{"style":{"color":"var(--text-2)"},"children":"Girijesh Singh"}]," · ","Lead Data Scientist"," · ","Waterloo, ON"," · ","2026"," · ","Built with Next.js + Framer Motion"]}]}]]}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/135xpw-_9a48o.js","async":true}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"y7GE2caJhLMHPIAJzLPOU"}
+12:null
