@@ -157,27 +157,141 @@
       </article>
     </div>
 
-    <p data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); margin-top: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--accent);">SIDE PROJECTS</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 16px;">
-      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">OPEN SOURCE</span>
-        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">DirectorAI</h3>
-        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">Browser-native AI video editor. Natural language → FFmpeg.wasm. TensorFlow.js face detection, all client-side. No uploads, no server, no privacy tradeoff.</p>
-        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">React 19 · FFmpeg.wasm · TensorFlow.js · Vite</p>
-        <a href="https://github.com/girijesh18/DirectorAI" target="_blank" rel="noopener" style="pointer-events: auto; display: inline-block; margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); text-decoration: none;">GitHub ↗</a>
-      </article>
-      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1) .06s, transform .8s cubic-bezier(.2,.7,.2,1) .06s; padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
-        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">LIVE</span>
-        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">AI Conversation Exporter</h3>
-        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">Export ChatGPT, Claude, and Gemini conversations as TXT, Markdown, JSON, or HTML. Zero permissions, all processing local. Chrome + Firefox.</p>
-        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">Chrome/Firefox Extension · Manifest V3 · Zero Permissions</p>
-        <a href="https://github.com/girijesh18/ai-conversation-exporter" target="_blank" rel="noopener" style="pointer-events: auto; display: inline-block; margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); text-decoration: none;">GitHub ↗</a>
-      </article>
-    </div>
   </section>
 
-  <!-- ═══ CH 3 · IMPACT — data towers ═══ -->
-  <section data-morph="3" data-screen-label="Impact" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12vh 24px;">
+  <!-- ═══ CH 3 · IN PUBLIC — orbit ═══ -->
+  <section data-morph="3" data-screen-label="In Public" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12vh 24px;">
+    <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; color: var(--accent);">LIVE · OPEN SOURCE · DOCUMENTED</p>
+    <h2 style="margin-top: 14px; font-weight: 800; font-size: clamp(38px, 7vw, 92px); line-height: 0.98; letter-spacing: -0.03em; text-shadow: 0 2px 30px rgba(3,6,10,0.95);">Work you can click.</h2>
+    <p style="margin-top: 18px; max-width: 600px; font-size: clamp(15px,1.8vw,18px); line-height: 1.6; color: #a9bac1; text-shadow: 0 2px 16px rgba(3,6,10,0.95), 0 0 30px rgba(3,6,10,0.85);">My production work is under NDA. So I ship the same architecture in the open — running systems, readable source, and the build notes behind each one.</p>
+  </section>
+
+  <section style="max-width: 1180px; margin: 0 auto; padding: 0 clamp(22px,5vw,60px) clamp(60px,10vh,120px);">
+
+    <!-- HireOS — flagship live product -->
+    <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); padding: clamp(26px,4vw,50px); border-radius: 22px; background: linear-gradient(160deg, rgba(10,20,26,0.72), rgba(6,10,16,0.6)); border: 1px solid rgba(89,217,230,0.22); backdrop-filter: blur(12px);">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(74,222,128,0.12); color: #4ade80;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 9px #4ade80; animation: blink 2.4s ease-in-out infinite; flex: none;"></span>LIVE</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(89,217,230,0.14); color: var(--accent);">OPEN SOURCE</span>
+      </div>
+      <h3 style="font-weight: 800; font-size: clamp(26px,4.5vw,52px); margin-top: 16px; line-height: 1.02; letter-spacing: -0.02em;">HireOS — Agentic Job Application OS</h3>
+      <p style="margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7d8e96;">hireos.girijesh.ca · Multi-LLM pipeline · Deployed on Fly.io</p>
+
+      <img src="./uploads/hireos-dashboard.jpg" alt="HireOS dashboard — pipeline stats, action items and AI recommendations" loading="lazy" style="display: block; width: 100%; height: auto; margin-top: 24px; border-radius: 12px; border: 1px solid rgba(232,240,242,0.1);">
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; text-align: left;">
+        <p style="color: #b3c1c8; font-size: 14.5px; line-height: 1.65;"><strong style="color: var(--accent); font-weight: 600;">Problem.</strong> A serious application is 90 minutes of work — assess, tailor, beat the ATS, prep stories, follow up. Trackers give you a Kanban board and let you do all the thinking.</p>
+        <p style="color: #b3c1c8; font-size: 14.5px; line-height: 1.65;"><strong style="color: var(--accent); font-weight: 600;">Build.</strong> Three-pass resume pipeline where the critic runs on a <em>different model</em> than the writer — self-critique is theatre. Per-task LLM routing. ChromaDB memory that finds the gap recurring across every evaluation.</p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8fa0a8;">
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">FastAPI</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">Multi-LLM Router</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">ChromaDB</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">Playwright</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">React</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">Fly.io</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px;">
+        <a href="https://hireos.girijesh.ca/" target="_blank" rel="noopener" style="pointer-events: auto; padding: 13px 22px; background: var(--accent); color: #04262a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 500; letter-spacing: 0.12em; text-decoration: none; border-radius: 3px;">OPEN THE APP ↗</a>
+        <a href="https://github.com/girijesh18/HireOS" target="_blank" rel="noopener" style="pointer-events: auto; padding: 13px 22px; background: rgba(232,240,242,0.03); border: 1px solid rgba(232,240,242,0.22); color: #e8f0f2; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-decoration: none; border-radius: 3px;">SOURCE ↗</a>
+        <a href="./blog/hireos.html" style="pointer-events: auto; padding: 13px 22px; background: rgba(89,217,230,0.07); border: 1px solid rgba(89,217,230,0.3); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-decoration: none; border-radius: 3px;">BUILD NOTES →</a>
+      </div>
+    </article>
+
+    <!-- hireos-mcp -->
+    <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); margin-top: 18px; padding: clamp(26px,4vw,44px); border-radius: 22px; background: rgba(7,12,18,0.62); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(74,222,128,0.12); color: #4ade80;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 9px #4ade80; animation: blink 2.4s ease-in-out infinite; flex: none;"></span>LIVE ENDPOINT</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(89,217,230,0.14); color: var(--accent);">MCP SERVER</span>
+      </div>
+      <h3 style="font-weight: 800; font-size: clamp(23px,3.4vw,36px); margin-top: 16px; line-height: 1.08; letter-spacing: -0.02em;">hireos-mcp — Making an App Agent-Native</h3>
+      <p style="margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7d8e96;">20+ MCP tools · Multi-tenant OAuth 2.0 · Dynamic client registration</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; align-items: center; margin-top: 24px;">
+        <div style="text-align: left;">
+          <p style="color: #b3c1c8; font-size: 14.5px; line-height: 1.65;">I didn't build a chat box into HireOS — I exposed it as tools and let Claude be the interface. It runs as a claude.ai custom connector: any HireOS user connects their <em>own</em> account via OAuth, no credentials in a config file.</p>
+          <p style="margin-top: 14px; color: #b3c1c8; font-size: 14.5px; line-height: 1.65;">The interesting problem: resume generation takes 60s, and MCP is request/response. There's no native async job pattern — so the tool returns a <em>hint the model can act on</em>.</p>
+        </div>
+        <img src="./uploads/hireos-mcp.png" alt="Claude invoking the hireos_list_jobs tool" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid rgba(232,240,242,0.1);">
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8fa0a8;">
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">Model Context Protocol</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">TypeScript</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">OAuth 2.0 + DCR</span>
+        <span style="padding: 5px 11px; border-radius: 999px; background: rgba(232,240,242,0.05); border: 1px solid rgba(232,240,242,0.08);">Fly.io</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;">
+        <a href="https://github.com/girijesh18/hireos-mcp" target="_blank" rel="noopener" style="pointer-events: auto; padding: 13px 22px; background: var(--accent); color: #04262a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 500; letter-spacing: 0.12em; text-decoration: none; border-radius: 3px;">SOURCE ↗</a>
+        <a href="./blog/hireos-mcp.html" style="pointer-events: auto; padding: 13px 22px; background: rgba(89,217,230,0.07); border: 1px solid rgba(89,217,230,0.3); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-decoration: none; border-radius: 3px;">BUILD NOTES →</a>
+      </div>
+    </article>
+
+    <!-- Open source strip -->
+    <p data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); margin-top: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--accent);">OPEN SOURCE</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr)); gap: 18px; margin-top: 16px;">
+
+      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">YOU ARE HERE</span>
+        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">This Portfolio</h3>
+        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">24,000 particles, one draw call, zero build step. Every chapter is the same buffer morphing to a new target. The text is rasterized on a 2D canvas and sampled into a point cloud.</p>
+        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">three.js · WebGL · Canvas 2D · One HTML file</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+          <a href="https://github.com/girijesh18/portfolio" target="_blank" rel="noopener" style="pointer-events: auto; color: var(--accent); text-decoration: none;">GitHub ↗</a>
+          <a href="./blog/portfolio.html" style="pointer-events: auto; color: var(--accent); text-decoration: none;">Build notes →</a>
+        </div>
+      </article>
+
+      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1) .06s, transform .8s cubic-bezier(.2,.7,.2,1) .06s; padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">BROWSER EXTENSION</span>
+        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">AI Conversation Exporter</h3>
+        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">Export ChatGPT, Claude and Gemini chats as TXT, Markdown, JSON or HTML. Two permissions, zero network requests. Privacy you can verify from the manifest, not the policy.</p>
+        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">Manifest V3 · Chrome + Firefox · Local-first</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+          <a href="https://github.com/girijesh18/ai-conversation-exporter" target="_blank" rel="noopener" style="pointer-events: auto; color: var(--accent); text-decoration: none;">GitHub ↗</a>
+          <a href="./blog/ai-conversation-exporter.html" style="pointer-events: auto; color: var(--accent); text-decoration: none;">Build notes →</a>
+        </div>
+      </article>
+
+      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">DEVELOPER TOOL</span>
+        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">Mermaid Diagram Creator</h3>
+        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">Render Mermaid diagrams locally and export sharp PNGs at any resolution — SVG rasterized to a canvas at an arbitrary scale factor. 7KB, one file, no dependency graph.</p>
+        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">Mermaid.js · Canvas API · Single file</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+          <a href="https://github.com/girijesh18/Mermaid-Flow-Diagram" target="_blank" rel="noopener" style="pointer-events: auto; color: var(--accent); text-decoration: none;">GitHub ↗</a>
+          <a href="./blog/mermaid-flow-diagram.html" style="pointer-events: auto; color: var(--accent); text-decoration: none;">Build notes →</a>
+        </div>
+      </article>
+
+      <article data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1) .06s, transform .8s cubic-bezier(.2,.7,.2,1) .06s; padding: 26px; border-radius: 18px; background: rgba(7,12,18,0.6); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px);">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--accent); letter-spacing: 0.08em;">EXPERIMENT</span>
+        <h3 style="font-size: 19px; font-weight: 700; margin-top: 12px;">DirectorAI</h3>
+        <p style="margin-top: 12px; color: #9fb0b7; font-size: 14px; line-height: 1.6;">Browser-native video editor. Chat-first interface over FFmpeg.wasm — edits compile and execute entirely client-side. No uploads, no backend, no upload limits.</p>
+        <p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7d86;">React · FFmpeg.wasm · Vite</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+          <a href="https://github.com/girijesh18/DirectorAI" target="_blank" rel="noopener" style="pointer-events: auto; color: var(--accent); text-decoration: none;">GitHub ↗</a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Writing -->
+    <div data-reveal="1" style="opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); margin-top: 22px; padding: clamp(28px,4vw,44px); border-radius: 20px; background: rgba(7,12,18,0.62); border: 1px solid rgba(232,240,242,0.09); backdrop-filter: blur(10px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px;">
+      <div style="text-align: left; max-width: 620px;">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--accent);">WRITING</p>
+        <p style="margin-top: 14px; color: #b3c1c8; font-size: 15.5px; line-height: 1.7;">Five build notes — one per system. Not tutorials: the decision I'd actually defend in an interview. Why the resume critic must be a different model. Why a tool's error string is really a prompt. Why 24,000 particles cost the same as one.</p>
+      </div>
+      <a href="./blog/index.html" style="pointer-events: auto; flex: none; padding: 15px 26px; background: var(--accent); color: #04262a; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-decoration: none; border-radius: 3px;">READ THE BUILD NOTES →</a>
+    </div>
+
+  </section>
+
+  <!-- ═══ CH 4 · IMPACT — data towers ═══ -->
+  <section data-morph="4" data-screen-label="Impact" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12vh 24px;">
     <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; color: var(--accent);">BY THE NUMBERS</p>
     <h2 style="margin-top: 14px; font-weight: 800; font-size: clamp(38px, 7vw, 92px); line-height: 0.98; letter-spacing: -0.03em; text-shadow: 0 2px 30px rgba(3,6,10,0.95);">Real impact at scale.</h2>
     <p style="margin-top: 18px; max-width: 560px; font-size: clamp(15px,1.8vw,18px); line-height: 1.6; color: #a9bac1;">Every number is earned, not estimated from a demo.</p>
@@ -205,7 +319,7 @@
   </section>
 
   <!-- ═══ CH 4 · CAREER — globe ═══ -->
-  <section data-morph="4" data-screen-label="Career" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12vh 24px;">
+  <section data-morph="5" data-screen-label="Career" style="min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12vh 24px;">
     <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.26em; color: var(--accent);">SIX YEARS · US · UK · AU · EU</p>
     <h2 style="margin-top: 14px; font-weight: 800; font-size: clamp(38px, 7vw, 92px); line-height: 0.98; letter-spacing: -0.03em; text-shadow: 0 2px 30px rgba(3,6,10,0.95);">Four regions.<br>One architecture.</h2>
   </section>
@@ -278,7 +392,7 @@
   </section>
 
   <!-- ═══ CH 5 · CONTACT — particles spell LET'S TALK ═══ -->
-  <section data-morph="5" id="contact" data-screen-label="Contact" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 0 24px 48px;">
+  <section data-morph="6" id="contact" data-screen-label="Contact" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 0 24px 48px;">
     <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.24em; color: var(--accent);">OPEN TO $190K+ LEAD &amp; STAFF DS ROLES · KITCHENER, ONTARIO OR REMOTE</p>
     <p style="margin-top: 14px; max-width: 580px; font-size: clamp(14.5px,1.7vw,17px); line-height: 1.6; color: #a9bac1;">Big Tech, AI-native, or Enterprise AI. If your engineering bar is high and you need an architect who thinks in systems, let's talk.</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 26px;">
@@ -315,9 +429,10 @@ class Component extends DCLogic {
         { n: '01', label: 'SIGNAL', jump: jump(0) },
         { n: '02', label: 'SYSTEMS', jump: jump(1) },
         { n: '03', label: 'WORK', jump: jump(2) },
-        { n: '04', label: 'IMPACT', jump: jump(3) },
-        { n: '05', label: 'CAREER', jump: jump(4) },
-        { n: '06', label: 'CONTACT', jump: jump(5) },
+        { n: '04', label: 'IN PUBLIC', jump: jump(3) },
+        { n: '05', label: 'IMPACT', jump: jump(4) },
+        { n: '06', label: 'CAREER', jump: jump(5) },
+        { n: '07', label: 'CONTACT', jump: jump(6) },
       ];
     }
     return { canvasRef: this.canvasRef, railRef: this.railRef, chapters: this._chapters };
@@ -431,6 +546,7 @@ class Component extends DCLogic {
       this.shapeCloud(N),
       this.shapeNeural(N, s),
       this.shapeTree(N, s),
+      this.shapeOrbit(N, s),
       this.shapeTowers(N, s),
       this.shapeGlobe(N, s),
       this.shapeCloud(N),
@@ -551,6 +667,42 @@ class Component extends DCLogic {
     return arr;
   }
 
+  shapeOrbit(N, s) {
+    const arr = new Float32Array(N * 3);
+    const core = 40 * s;
+    const rings = [[104, 0, 0], [146, 1.05, 0.35], [188, -0.72, 0.95]];
+    const sats = [[0, 0.7], [1, 2.4], [2, 4.6], [1, 5.5]];
+    const place = (rad, th, tilt, roll, spread) => {
+      const x0 = rad * Math.cos(th), y0 = rad * Math.sin(th), z0 = this.g_() * spread;
+      const cy = Math.cos(tilt), sy = Math.sin(tilt);
+      const y1 = y0 * cy - z0 * sy, z1 = y0 * sy + z0 * cy;
+      const cz = Math.cos(roll), sz = Math.sin(roll);
+      return [x0 * cz - y1 * sz, x0 * sz + y1 * cz, z1];
+    };
+    for (let i = 0; i < N; i++) {
+      const j = i * 3, u = Math.random();
+      if (u < 0.28) {
+        const th = Math.random() * 6.283, phi = Math.acos(2 * Math.random() - 1);
+        const r = core + this.g_() * 3.4 * s;
+        arr[j] = r * Math.sin(phi) * Math.cos(th);
+        arr[j + 1] = r * Math.cos(phi);
+        arr[j + 2] = r * Math.sin(phi) * Math.sin(th);
+      } else if (u < 0.38) {
+        const st = sats[(Math.random() * sats.length) | 0];
+        const rg = rings[st[0]];
+        const p = place(rg[0] * s, st[1] + this.g_() * 0.06, rg[1], rg[2], 5 * s);
+        arr[j] = p[0] + this.g_() * 4 * s;
+        arr[j + 1] = p[1] + this.g_() * 4 * s;
+        arr[j + 2] = p[2];
+      } else {
+        const rg = rings[(Math.random() * rings.length) | 0];
+        const p = place(rg[0] * s + this.g_() * 2.4 * s, Math.random() * 6.283, rg[1], rg[2], 1.8 * s);
+        arr[j] = p[0]; arr[j + 1] = p[1]; arr[j + 2] = p[2];
+      }
+    }
+    return arr;
+  }
+
   shapeTowers(N, s) {
     const arr = new Float32Array(N * 3);
     const towers = [[-125, -45, 150], [-78, 35, 95], [-28, -72, 125], [2, 25, 65], [52, -32, 145], [95, 52, 105], [135, -12, 85], [-52, -105, 70]];
@@ -643,7 +795,7 @@ class Component extends DCLogic {
     const a = this.sampleText('GIRIJESH', worldW);
     const b = this.sampleText("LET'S TALK", worldW);
     if (a) this.fillFromPts(this.shapes[0], a, 22);
-    if (b) this.fillFromPts(this.shapes[5], b, 22);
+    if (b) this.fillFromPts(this.shapes[6], b, 22);
   }
 
   tick(ts) {
@@ -651,7 +803,7 @@ class Component extends DCLogic {
     const vh = window.innerHeight || 1;
 
     // ── morph progress from scroll anchors ──
-    if (!this._anchors || this._anchors.length !== 6) {
+    if (!this._anchors || this._anchors.length !== 7) {
       this._anchors = Array.from(document.querySelectorAll('[data-morph]')).sort((a, b) => (+a.dataset.morph) - (+b.dataset.morph));
     }
     let cfT = this.cf;
@@ -668,7 +820,7 @@ class Component extends DCLogic {
           if (mid < b) { cfT = k + (mid - a) / Math.max(1, b - a); break; }
         }
       }
-      cfT = Math.max(0, Math.min(5, cfT));
+      cfT = Math.max(0, Math.min(6, cfT));
     }
     this.cf += (cfT - this.cf) * 0.07;
     const cf = this.cf;
@@ -677,7 +829,7 @@ class Component extends DCLogic {
     this.ptrS.y += (this.ptr.y - this.ptrS.y) * 0.05;
 
     const motion = this.props.motionAmount != null ? this.props.motionAmount : 1;
-    const i0 = Math.min(4, Math.floor(cf));
+    const i0 = Math.min(5, Math.floor(cf));
     const f = cf - i0;
     const SA = this.shapes[i0], SB = this.shapes[i0 + 1];
     const P = this.geo.getAttribute('position');
@@ -695,12 +847,12 @@ class Component extends DCLogic {
     }
     P.needsUpdate = true;
 
-    const amp = Math.max(0, Math.min(1, Math.min(cf - 0.35, 4.65 - cf) * 1.6));
-    const tilt = this.lerpArr([0, 0.06, 0.04, 0.3, 0.12, 0], cf);
+    const amp = Math.max(0, Math.min(1, Math.min(cf - 0.35, 5.65 - cf) * 1.6));
+    const tilt = this.lerpArr([0, 0.06, 0.04, 0.2, 0.3, 0.12, 0], cf);
     this.group.rotation.y = amp * Math.sin(t * 0.1) * 0.5 * motion + this.ptrS.x * (0.05 + 0.18 * amp);
     this.group.rotation.x = tilt + this.ptrS.y * 0.07 * (0.3 + amp);
 
-    this.camera.position.z = this.lerpArr([320, 350, 360, 385, 350, 320], cf) * this.zMul;
+    this.camera.position.z = this.lerpArr([320, 350, 360, 400, 385, 350, 320], cf) * this.zMul;
     this.camera.position.x = this.ptrS.x * 16;
     this.camera.position.y = -this.ptrS.y * 10;
     this.camera.lookAt(0, 0, 0);

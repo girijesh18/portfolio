@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing — Girijesh Singh</title>
+<meta name="description" content="Build notes on the systems I ship: agentic pipelines, MCP servers, browser-native tools, and the particle engine behind this site.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">WRITING</p>
+    <h1>Build notes.</h1>
+    <p class="dek">My production work is under NDA. These are the systems I can show you — each one shipped, each one with the engineering decision I'd actually defend in an interview.</p>
+  </header>
+
+  <div class="posts" style="margin-bottom: clamp(60px,10vh,110px);">
+
+    <a class="card" href="hireos.html">
+      <div class="row"><span class="live-dot"></span> LIVE PRODUCT <span class="date">· JUNE 2026 · 9 MIN</span></div>
+      <h2>HireOS: an agentic OS for the job hunt</h2>
+      <p>A multi-LLM pipeline for resume generation, fit assessment and interview prep. The load-bearing decision: the resume critic has to run on a different model than the resume writer — self-critique is theatre.</p>
+    </a>
+
+    <a class="card" href="hireos-mcp.html">
+      <div class="row"><span class="live-dot"></span> LIVE PRODUCT <span class="date">· JULY 2026 · 10 MIN</span></div>
+      <h2>hireos-mcp: making an app agent-native</h2>
+      <p>20+ MCP tools over an existing REST API, multi-tenant OAuth with dynamic client registration, and what to do when a tool takes longer than the agent is willing to wait.</p>
+    </a>
+
+    <a class="card" href="portfolio.html">
+      <div class="row">OPEN SOURCE <span class="date">· JULY 2026 · 8 MIN</span></div>
+      <h2>This site: 24,000 particles, one draw call</h2>
+      <p>The particle morph engine behind girijesh.ca. Scroll position as a float, per-particle stagger, and turning text into a point cloud with a 2D canvas. No build step.</p>
+    </a>
+
+    <a class="card" href="ai-conversation-exporter.html">
+      <div class="row">OPEN SOURCE <span class="date">· MAY 2026 · 6 MIN</span></div>
+      <h2>AI Conversation Exporter: privacy as an architecture</h2>
+      <p>Export ChatGPT, Claude and Gemini conversations with two permissions and zero network requests. The hard part wasn't the export — it was defeating the virtualized message list.</p>
+    </a>
+
+    <a class="card" href="mermaid-flow-diagram.html">
+      <div class="row">OPEN SOURCE <span class="date">· APRIL 2026 · 5 MIN</span></div>
+      <h2>A diagram tool in one HTML file</h2>
+      <p>7KB, no build, no server. The one idea worth stealing: rasterizing SVG to a canvas at an arbitrary scale factor, so your exported diagrams are sharp at any resolution.</p>
+    </a>
+
+  </div>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST · KITCHENER, ON</span>
+    <span><a href="../index.html">← Back to portfolio</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hireos-mcp — shipping an OAuth MCP server | Girijesh Singh</title>
+<meta name="description" content="Turning a REST app into an agent-native one with the Model Context Protocol: 20+ tools, multi-tenant OAuth with dynamic client registration, and what to do when a tool takes longer than the agent will wait.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">LIVE PRODUCT · BUILD NOTES</p>
+    <h1>hireos-mcp: making an app agent-native</h1>
+    <p class="meta">Girijesh Singh · July 2026 · 10 min read</p>
+    <p class="dek">I didn't want to build a chat interface into HireOS. I wanted Claude to <em>be</em> the interface. That's a one-sentence description of the Model Context Protocol — and about three genuinely hard problems underneath it.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/girijesh18/hireos-mcp" target="_blank" rel="noopener">SOURCE ↗</a>
+      <a class="btn ghost" href="https://hireos.girijesh.ca/" target="_blank" rel="noopener"><span class="live-dot"></span> HIREOS ↗</a>
+      <a class="btn ghost" href="hireos.html">HOW HIREOS WORKS →</a>
+    </div>
+  </header>
+
+  <article>
+    <figure>
+      <img class="shot" src="../uploads/hireos-mcp.png" alt="Claude invoking the Hireos list jobs tool">
+      <figcaption>"list all jobs" → Claude calls <code>hireos_list_jobs</code> against my live pipeline. No HireOS tab open.</figcaption>
+    </figure>
+
+    <h2>The temptation I avoided</h2>
+    <p><a href="hireos.html">HireOS</a> is a job-hunt pipeline with a pile of agents behind it. The obvious next feature was a chat box in the corner of the dashboard — ask questions about your pipeline, get answers. Every app is growing one right now.</p>
+    <p>It's the wrong build. A chat box in my app means I maintain a conversation UI, a streaming transport, a context manager, a tool-dispatch loop and a model integration — all to reimplement, worse, a client the user already has open in another tab. And it strands the capability inside my app: it can't compose with anything else the user is doing.</p>
+    <p>The Model Context Protocol inverts it. I don't build a client. I expose HireOS as <strong>tools</strong>, and the user brings whatever agent they like — Claude Desktop, Claude Code, claude.ai. My job shrinks to the part only I can do: describing my domain well enough that a model can act in it.</p>
+
+    <h2>v1: twenty tools over stdio</h2>
+    <p>The server is TypeScript, and it is deliberately <strong>a client of the existing HireOS REST API</strong> — zero backend changes. That constraint kept it honest: if a workflow couldn't be expressed against the public API, it didn't belong in the tool surface either.</p>
+    <table>
+      <thead><tr><th>Tool</th><th>Does</th></tr></thead>
+      <tbody>
+        <tr><td><code>hireos_track_job</code></td><td>Track a job from a URL or pasted JD text</td></tr>
+        <tr><td><code>hireos_list_jobs</code></td><td>List the pipeline, filtered by status / platform / priority</td></tr>
+        <tr><td><code>hireos_assess_fit</code></td><td>7-axis fit assessment</td></tr>
+        <tr><td><code>hireos_generate_resume</code></td><td>Tailored, ATS-optimized resume</td></tr>
+        <tr><td><code>hireos_edit_resume</code></td><td>One-off natural-language edit to the markdown</td></tr>
+        <tr><td><code>hireos_run_ats</code></td><td>(Re)score a resume version's PDF</td></tr>
+        <tr><td><code>hireos_get_insights</code></td><td>AI narrative + activity stats</td></tr>
+      </tbody>
+    </table>
+    <p>…plus a dozen more for cover letters, deep company research, interview prep, LinkedIn outreach, the story bank and pipeline analytics. There's also a resource, <code>hireos://jobs</code>, that hands the agent the current pipeline as JSON without a tool call.</p>
+    <p>The thing nobody warns you about: <strong>the tool description is the API contract now.</strong> Not the JSON schema — the prose. A model decides whether to call <code>hireos_assess_fit</code> or <code>hireos_get_job</code> by reading a sentence I wrote. Ambiguous descriptions don't throw errors; they cause the agent to quietly pick the wrong tool and produce a confidently wrong answer. I spent more time editing those sentences than writing the handlers, and I'd do it again.</p>
+
+    <h2>The hard problem: tools that take longer than the agent will wait</h2>
+    <p>MCP is request/response. <code>hireos_generate_resume</code> kicks off a three-pass LLM pipeline that takes 30 to 60 seconds. There is no native "job accepted, poll me later" pattern in the protocol, and an agent that's been blocking on a tool call for a minute is a bad experience in any client.</p>
+    <p>What I do instead: the long-running tools block and poll internally for up to about 50 seconds. If the backend agent is still working when that budget expires, the tool doesn't fail and it doesn't hang — it returns:</p>
+    <pre><code>{ "status": "still_processing",
+  "hint": "Resume generation is still running.
+           Call hireos_list_resumes in a moment to collect it." }</code></pre>
+    <p>That's not elegant, and I want to be clear that it's a workaround rather than a design. But it's the right <em>shape</em> of workaround, because it hands the model something it's actually good at: a next action, in words. The agent reads the hint, waits, calls the read tool, gets the resume. The async gap gets papered over by the one component in the system that can improvise.</p>
+    <blockquote>Designing tools for an LLM caller is different from designing them for a program. A program needs a status code. A model needs to be <em>told what to do next</em>, in the response body. Error strings are prompts.</blockquote>
+
+    <h2>v2: multi-tenant OAuth, because single-user didn't scale to "anyone else"</h2>
+    <p>v1 put your HireOS email and password in the MCP client's env block. Fine for me on my machine. Completely unshippable to anyone else — plaintext credentials in a config file, one server per user, stdio only.</p>
+    <p>So v2 is an HTTP MCP server, deployed on Fly, with <strong>OAuth 2.0 and dynamic client registration</strong>. It's live at <code>https://hireos-mcp.fly.dev/mcp</code>, and any HireOS user can add it to claude.ai as a custom connector:</p>
+    <ol>
+      <li>Settings → Connectors → Add custom connector.</li>
+      <li>Paste the URL. <strong>Leave Client ID and Secret blank</strong> — the server supports dynamic registration, so the client registers itself.</li>
+      <li>Click Connect. A HireOS login page opens. Sign in with your own account.</li>
+      <li>Every tool now acts on <em>your</em> pipeline.</li>
+    </ol>
+    <p>That last line is the whole point of v2. The tool surface is identical; the identity is per-user. Internally the server exchanges the OAuth grant for a HireOS JWT, caches it, and re-authenticates transparently when it expires — so a connector that sat idle for a month just works on the next call instead of throwing a 401 at the model.</p>
+
+    <h3>Things that bit me</h3>
+    <ul>
+      <li><strong>Dynamic client registration is not optional</strong> if you want to be a claude.ai custom connector. I initially built the classic pre-registered client-ID flow and it was a dead end — the connector UI expects to register itself.</li>
+      <li><strong>Token expiry has to be invisible.</strong> A 401 surfacing to the model produces a hallucinated apology, not a re-auth. The server has to handle it below the tool layer.</li>
+      <li><strong>Scraping a JD from a URL inside a tool call is slow and login-walled sites will beat you.</strong> The tool takes <code>jd_text</code> as an alternative, and the description says so, so the model falls back on its own.</li>
+    </ul>
+
+    <h2>Why this matters beyond one job-hunt app</h2>
+    <p>My day job is production GenAI for insurance — FastMCP services, PydanticAI agents, multi-tenant schemas — and none of it can be shown to anyone. <code>hireos-mcp</code> is the same architecture on a problem I own outright: an existing REST product, a tool layer over it, per-tenant identity, and an agent as the front end.</p>
+    <p>The broader bet is that "app with an API" is becoming "app with a tool surface," and the two are not the same artifact. An API is designed for a programmer who read the docs. A tool surface is designed for a model that reads only your descriptions, has no memory of your conventions, and will confidently do the wrong thing if you're vague. That's a writing problem as much as an engineering one, which is not what I expected going in.</p>
+
+    <div class="tags">
+      <span>MCP</span><span>TypeScript</span><span>OAuth 2.0</span><span>Dynamic Client Registration</span><span>Fly.io</span><span>Agent Tooling</span>
+    </div>
+  </article>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST</span>
+    <span><a href="index.html">← All writing</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

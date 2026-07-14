@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Conversation Exporter — privacy as an architecture | Girijesh Singh</title>
+<meta name="description" content="A browser extension that exports ChatGPT, Claude and Gemini conversations with two permissions and zero network requests. Why the hard part was the scrolling.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">OPEN SOURCE · BUILD NOTES</p>
+    <h1>AI Conversation Exporter: privacy as an architecture, not a promise</h1>
+    <p class="meta">Girijesh Singh · May 2026 · 6 min read</p>
+    <p class="dek">Every "export your AI chats" tool asks you to paste your conversation into their website. This one makes zero network requests, holds two permissions, and cannot betray you even if I wanted it to.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/girijesh18/ai-conversation-exporter" target="_blank" rel="noopener">SOURCE ↗</a>
+    </div>
+  </header>
+
+  <article>
+    <h2>The problem is mundane and the solutions are all creepy</h2>
+    <p>My most useful technical conversations of the last two years happened inside ChatGPT, Claude and Gemini — debugging sessions, architecture arguments, long derivations. All of it trapped in a scrolling div behind someone else's login, un-greppable, un-archivable, one account suspension away from gone.</p>
+    <p>Search for an exporter and you find a genre: paste your conversation into <em>our</em> site, or install <em>our</em> extension, which requests permission to read data on all websites and phones home for "analytics." You're handing a stranger the transcript of everything you've asked an AI. For most people that's their work, their health, their finances, their business ideas.</p>
+    <p>The fix isn't a better privacy policy. It's an architecture where the privacy claim is <strong>structurally verifiable</strong> — where you don't have to trust me, because I've deprived myself of the ability to misbehave.</p>
+
+    <h2>Two permissions, zero network calls</h2>
+    <p>The whole extension manifest asks for:</p>
+    <pre><code>"permissions": ["activeTab", "downloads"]</code></pre>
+    <p>That's it. <code>activeTab</code> means it can only touch the page you're currently looking at, only after you click the icon — not "all sites," not in the background. <code>downloads</code> means it can save a file. There is no <code>host_permissions</code> block, no background fetch, no analytics endpoint, no telemetry.</p>
+    <blockquote>You don't have to take my word for any of this. Open the manifest — it's ten lines. The absence of a permission is a much stronger guarantee than the presence of a privacy policy, because the browser enforces it and the policy doesn't.</blockquote>
+    <p>Everything — DOM extraction, formatting, serialization — happens in the page's own context and terminates at the download folder. The extension has no server because there's nothing a server could usefully do.</p>
+
+    <h2>The actually hard part: lazy rendering</h2>
+    <p>Here's what I didn't expect to be the bulk of the work.</p>
+    <p>All three platforms virtualize their message lists. A 200-message conversation does not exist in the DOM — only the 15 or so messages near your viewport do. Scroll up and old ones get mounted while the ones below get destroyed. If you naively query the message nodes and serialize them, you export a fragment of the middle of the conversation and never notice, because the output <em>looks</em> plausible.</p>
+    <p>So before it can read anything, the extension has to <strong>drive the page</strong>: programmatically scroll to force the virtualizer to mount every message, waiting for content to settle at each step, until it reaches a stable full transcript. Only then does extraction start. It's the least glamorous code in the project and the reason the exports are actually complete.</p>
+
+    <h3>And then the selectors rot</h3>
+    <p>Each platform needs its own DOM adapter, and none of them owe me a stable interface. ChatGPT, Claude and Gemini all ship UI changes on their own schedule, and any of those can silently break extraction. This is the permanent tax on scraping a UI you don't control, and there's no clever way out — only a small enough adapter per platform that fixing one is a ten-minute job rather than a refactor.</p>
+
+    <h2>Four formats, because export is not one use case</h2>
+    <table>
+      <thead><tr><th>Format</th><th>For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Markdown</strong></td><td>Pasting into notes, docs, a PR. The default, and the clipboard button copies it directly.</td></tr>
+        <tr><td><strong>JSON</strong></td><td>Feeding back into a pipeline. Structured, machine-readable.</td></tr>
+        <tr><td><strong>Plain text</strong></td><td>Grep. Diff. Archive.</td></tr>
+        <tr><td><strong>Self-contained HTML</strong></td><td>Reading it later, styled, offline. One file, no assets, respects your system dark mode.</td></tr>
+      </tbody>
+    </table>
+    <p>Code blocks keep their fences and language tags — which sounds trivial until you've exported a debugging session and found your Python collapsed into unindented prose. Files are named after the conversation title, because <code>conversation(3).txt</code> is not an archive.</p>
+
+    <h2>The general point</h2>
+    <p>I build production GenAI systems in a regulated industry, and the discipline that transfers most cleanly to small tools is this: <strong>prefer guarantees you can't break over promises you intend to keep.</strong></p>
+    <p>A privacy policy is a promise. A manifest with two permissions and no network access is a guarantee — enforced by the browser, auditable by a stranger in thirty seconds, and immune to my own future bad decisions. Same instinct as deterministic citation validation in a RAG system: don't ask whether the component behaved, build it so misbehaving isn't reachable.</p>
+    <p>It's a browser extension for saving chat logs. It is not important software. But the constraint that shaped it is the same one I'd defend on a system that matters.</p>
+
+    <div class="tags">
+      <span>Manifest V3</span><span>Chrome</span><span>Firefox</span><span>Zero Permissions</span><span>Local-first</span>
+    </div>
+  </article>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST</span>
+    <span><a href="index.html">← All writing</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mermaid Diagram Creator — one HTML file, non-blurry PNGs | Girijesh Singh</title>
+<meta name="description" content="A 7KB single-file diagram tool. The interesting part: rasterizing SVG to a canvas at an arbitrary scale factor, so exported diagrams are sharp at any resolution.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">OPEN SOURCE · BUILD NOTES</p>
+    <h1>A diagram tool in one HTML file</h1>
+    <p class="meta">Girijesh Singh · April 2026 · 5 min read</p>
+    <p class="dek">7KB, no build, no server, no account. The whole tool is a single file you can email to someone. The one genuinely useful idea in it is how to get a sharp PNG out of an SVG.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/girijesh18/Mermaid-Flow-Diagram" target="_blank" rel="noopener">SOURCE ↗</a>
+    </div>
+  </header>
+
+  <article>
+    <h2>Why this exists at all</h2>
+    <p>I draw architecture diagrams constantly — retrieval pipelines, agent topologies, service boundaries — and Mermaid is the right tool: text in, diagram out, diffable in git. But the moment you need to put one in a slide deck or a design doc, you hit the same two walls.</p>
+    <p>Wall one: the online editors want your diagram on their servers. Half my diagrams describe systems under NDA. Pasting the architecture of a client's claims platform into a free web tool is not a thing I'm willing to do, and "it's probably fine" is not a security posture.</p>
+    <p>Wall two: every export path gives you a <strong>blurry PNG</strong>. You screenshot the preview pane, drop it in a deck, project it, and it's mush. Mermaid renders crisp vector SVG and then the world insists on turning it into a low-resolution raster.</p>
+    <p>So: one HTML file. Open it from your desktop, paste Mermaid code, get a live preview and a PNG at whatever resolution you ask for. It works offline after the first load, and nothing you type leaves the machine.</p>
+
+    <h2>The part worth stealing: scale-factor rasterization</h2>
+    <p>The naive export is to grab the SVG and draw it to a canvas the same size as the preview pane. That gives you a PNG at exactly the resolution of a div on your screen — which is to say, useless for anything projected or printed.</p>
+    <p>The fix is to decouple the export resolution from the display resolution entirely. Because SVG is vector, it will rasterize cleanly at <em>any</em> size — so you make the canvas as large as you like and let the browser redraw the vector into it:</p>
+    <pre><code>// read the rendered SVG's intrinsic size
+const { width, height } = svg.getBoundingClientRect();
+
+// make a canvas N× bigger — N is a user-supplied scale factor
+const canvas = document.createElement('canvas');
+canvas.width  = width  * scale;    // scale = 8 → 8× the pixels
+canvas.height = height * scale;
+
+const ctx = canvas.getContext('2d');
+ctx.fillStyle = '#fff';            // SVG transparency → white, not black
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// the browser re-rasterizes the vector at the larger size
+ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+triggerDownload(canvas.toDataURL('image/png'));</code></pre>
+    <p>Set the scale to 8 and a diagram that occupies 600px on screen exports at 4800px. It is not an upscale — nothing is interpolated, nothing is invented. The vector is re-rendered from source at the higher resolution, so the text edges are as sharp at 4800px as they were at 600px. Drop that into a slide and project it at any size you like.</p>
+    <blockquote>The general lesson: if you're rasterizing vector art, the canvas size is a <em>choice</em>, not a consequence of the layout. Most tools export at display resolution out of habit, not necessity.</blockquote>
+    <p>The one non-obvious detail is the white <code>fillRect</code> before the draw. SVG backgrounds are transparent, and transparent PNG dropped onto a dark slide theme gives you black text on black. Paint a background first.</p>
+
+    <h2>Single-file as a deliberate constraint</h2>
+    <p>The entire tool is one <code>.html</code> — markup, styles, logic, and a CDN <code>&lt;script&gt;</code> for Mermaid itself. No <code>npm install</code>, no bundler, no deploy step. You save the file and it works, this year and in five years, on any machine with a browser.</p>
+    <p>There's a real engineering argument here and it isn't nostalgia. The maintenance cost of a tool is dominated by its dependency graph, not its feature count. This thing has no <code>package.json</code>, so it has no dependency graph, so it has no maintenance. The equivalent React app would need attention every few months just to keep building — for a tool whose job is to call one library function and rasterize the result.</p>
+    <p>The escape hatch matters too: it's small enough that anyone can read all of it in a sitting, and portable enough to hand to a colleague as an attachment. Most of my favourite tools are one file.</p>
+
+    <h2>What it doesn't do</h2>
+    <ul>
+      <li>No saving. It's a renderer, not a document store — your diagram source lives in your repo, where it belongs.</li>
+      <li>No collaboration, no history, no sharing. Those are Mermaid-source-in-git problems, already solved.</li>
+      <li>The initial Mermaid load comes from a CDN, so the very first open needs a network. After that, offline is fine.</li>
+    </ul>
+    <p>It solves exactly one problem — private, sharp diagram export — and then stops. That's the whole pitch.</p>
+
+    <div class="tags">
+      <span>Mermaid.js</span><span>Canvas API</span><span>SVG</span><span>Single file</span><span>Zero dependencies</span>
+    </div>
+  </article>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST</span>
+    <span><a href="index.html">← All writing</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

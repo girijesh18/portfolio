@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HireOS — building an agentic job-application OS | Girijesh Singh</title>
+<meta name="description" content="A multi-LLM pipeline for resume generation, fit assessment and interview prep. Why the resume critic has to be a different model than the resume writer.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">LIVE PRODUCT · BUILD NOTES</p>
+    <h1>HireOS: an agentic OS for the job hunt</h1>
+    <p class="meta">Girijesh Singh · June 2026 · 9 min read</p>
+    <p class="dek">Most job trackers are a spreadsheet with a login. HireOS treats the job hunt as what it actually is — a pipeline problem with an adversarial ranking function at the other end — and puts a multi-LLM agent stack behind every stage of it.</p>
+    <div class="links">
+      <a class="btn primary" href="https://hireos.girijesh.ca/" target="_blank" rel="noopener"><span class="live-dot"></span> OPEN THE APP ↗</a>
+      <a class="btn ghost" href="https://github.com/girijesh18/HireOS" target="_blank" rel="noopener">SOURCE ↗</a>
+    </div>
+  </header>
+
+  <article>
+    <figure>
+      <img class="shot" src="../uploads/hireos-dashboard.jpg" alt="HireOS dashboard showing pipeline stats, action items and AI recommendations">
+      <figcaption>The HireOS dashboard. Pipeline rows blurred — that's my live job search.</figcaption>
+    </figure>
+
+    <h2>The actual problem</h2>
+    <p>Applying to a serious role takes about ninety minutes of real work: read the JD properly, decide whether it's even worth it, rewrite the resume so the relevant experience is on top, get through the ATS keyword filter, prep the stories you'll be asked for, and then remember to follow up eleven days later. Do that forty times and the bottleneck isn't motivation — it's that you're a human running a batch job.</p>
+    <p>Every tool in this space solves the wrong half. Trackers give you a Kanban board and let you do all the thinking. Resume tools spit out one tailored PDF and have no idea what happened to it. Nothing owns the whole pipeline, which means nothing can learn from it.</p>
+    <p>So HireOS owns the whole pipeline: <strong>track → assess → tailor → apply → prep → follow up</strong>, with an agent doing the expensive cognitive step at each stage and a database remembering what happened.</p>
+
+    <h2>The stack</h2>
+    <table>
+      <thead><tr><th>Layer</th><th>Tech</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Backend</td><td>FastAPI, SQLAlchemy, SQLite</td><td>Single-user-per-instance. Postgres would be ceremony.</td></tr>
+        <tr><td>Agents</td><td>Gemini 2.5, Claude, Groq, OpenAI</td><td>Routed per task — see below.</td></tr>
+        <tr><td>Memory</td><td>ChromaDB, embedded</td><td>Semantic search over every interaction. No vector-DB service to run.</td></tr>
+        <tr><td>Frontend</td><td>React + Vite</td><td>—</td></tr>
+        <tr><td>Documents</td><td>Playwright (Chromium)</td><td>HTML → PDF that survives an ATS parser.</td></tr>
+        <tr><td>Scraping</td><td>Playwright Stealth</td><td>Job boards actively fight you.</td></tr>
+      </tbody>
+    </table>
+    <p>It runs on Fly.io. SQLite on a mounted volume, one process, no Kubernetes. The whole thing costs less per month than a sandwich.</p>
+
+    <h2>The part I'd actually defend in an interview: a three-pass resume pipeline</h2>
+    <p>The naive version of AI resume tailoring is one prompt: <em>"here's my resume, here's the JD, rewrite it."</em> What comes back is fluent, confident, and quietly terrible. It invents a metric. It reformats your dates into something the ATS can't parse. It writes "spearheaded" four times. And because the model that wrote it is the model you'd ask to check it, it will happily tell you it's excellent.</p>
+    <p>HireOS runs three passes, and the third one is the one that matters.</p>
+
+    <h3>Pass 1 — tailor</h3>
+    <p>The LLM composes from a <strong>master resume</strong> broken into components — individual bullets, projects, skill blocks — rather than editing prose. It's selecting and rephrasing real things I did, not generating a resume from a JD. That constraint alone kills most hallucinated experience: the model can't reach for a bullet that doesn't exist in the component store.</p>
+
+    <h3>Pass 2 — validate against design rules</h3>
+    <p>There's a file, <code>meta/resume_design.md</code>, that encodes the formatting rules — margins, date formats, section order, bullet length, what an ATS chokes on. It's injected into every generation, and then a second pass re-reads the output <em>against</em> it and fixes violations. Treating layout constraints as a document the model must satisfy, rather than instructions buried in a prompt, made formatting drift mostly go away.</p>
+
+    <h3>Pass 3 — the critic, and it must be a different model</h3>
+    <p>A separate <code>CriticAgent</code> — default Claude, deliberately not whichever model did the writing — reviews the draft and returns a structured, brutal critique: fatal weaknesses, weak bullets <em>with rewrites</em>, ATS red flags, keyword gaps, and how you'd compare to a strong competing candidate.</p>
+    <blockquote>Self-critique by the same model is theatre. It reliably rates its own output as strong, because the same weights that generated the text find that text plausible. Swap the critic to a different model family and the review gets sharp immediately — it has no stake in the draft and no shared blind spots.</blockquote>
+    <p>This is the single highest-leverage design decision in the app, and it generalizes well beyond resumes. Any generate-then-evaluate loop where both roles run on one model is measuring the model's self-consistency, not the artifact's quality.</p>
+
+    <h2>Multi-LLM routing is a cost decision, not a flex</h2>
+    <p>An <code>llm_router.py</code> abstraction sits over Gemini, Claude, Groq and OpenAI, and the model is chosen per task rather than per app:</p>
+    <ul>
+      <li><strong>Extraction</strong> — pull company, title, salary, stack out of a JD. Structured, verifiable, boring. Send it to the cheapest fast model.</li>
+      <li><strong>Critique and fit assessment</strong> — needs actual judgment. Pay for the strong model.</li>
+      <li><strong>Bulk narrative</strong> — insights and summaries. Groq, because latency is what you feel here.</li>
+    </ul>
+    <p>Pinning one model for the entire app means either overpaying for JD parsing or under-thinking the critique. Neither is a good trade, and the abstraction to avoid both is about a hundred lines.</p>
+
+    <h2>Memory: ChromaDB over every interaction</h2>
+    <p>Each evaluation, critique and outreach draft gets embedded and stored. That turns the pipeline into something queryable — and the interesting output isn't retrieval, it's <em>aggregation across the corpus</em>. The dashboard screenshot above shows the real payoff:</p>
+    <blockquote>"Address recurring gap: 'No direct HCM/workforce management domain experience' (appears in 1 evaluations) — this is your most common weakness."</blockquote>
+    <p>No single evaluation could tell me that. It only exists because every evaluation is stored and compared. When a gap shows up in nine assessments instead of one, that's not feedback on an application — that's feedback on a career, and it's the one output of this app I genuinely could not have produced myself.</p>
+
+    <h2>What's still ugly</h2>
+    <ul>
+      <li><strong>Scraping is a losing war.</strong> LinkedIn is login-walled and hostile; Playwright Stealth buys time, not victory. Pasting the JD text always works, so that's the escape hatch.</li>
+      <li><strong>Long-running agents don't fit request/response.</strong> Resume generation takes 30–60s. In the web UI you can poll. Over MCP, that assumption breaks badly — <a href="hireos-mcp.html">which is its own post</a>.</li>
+      <li><strong>ATS scoring is an approximation.</strong> I score against a model of what parsers do. Nobody outside Workday knows what Workday actually does.</li>
+    </ul>
+
+    <h2>Why it's worth reading as a portfolio piece</h2>
+    <p>My day job is production GenAI in insurance, where hallucinated citations have legal consequences, and almost none of it can be shown. HireOS is the same discipline on a problem I'm allowed to publish: structured generation against real constraints, adversarial validation, per-task model routing, and a bias toward deterministic checks around a non-deterministic core.</p>
+    <p>It's also, unglamorously, the tool I use to run my own job search. It has an <a href="hireos-mcp.html">MCP server</a> so I can drive it from Claude instead of clicking. That felt like a stunt until it became the way I actually use it.</p>
+
+    <div class="tags">
+      <span>FastAPI</span><span>Multi-LLM</span><span>ChromaDB</span><span>Playwright</span><span>React</span><span>Fly.io</span>
+    </div>
+  </article>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST</span>
+    <span><a href="index.html">← All writing</a></span>
+  </footer>
+</div>
+
+</body>
+</html>

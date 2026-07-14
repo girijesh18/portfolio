@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building this site — 24,000 particles, one draw call | Girijesh Singh</title>
+<meta name="description" content="How the particle morph engine behind girijesh.ca works: scroll-driven shape interpolation, per-particle stagger, and turning text into a point cloud with a 2D canvas.">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="../index.html" class="home">← GIRIJESH SINGH</a>
+    <a href="index.html">WRITING</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="post">
+    <p class="kicker">OPEN SOURCE · BUILD NOTES</p>
+    <h1>This site: 24,000 particles, one draw call</h1>
+    <p class="meta">Girijesh Singh · July 2026 · 8 min read</p>
+    <p class="dek">The site you're reading is one HTML file and a single <code>THREE.Points</code> object. Every chapter you scroll through is the same 24,000 particles rearranging themselves. Here's the engine.</p>
+    <div class="links">
+      <a class="btn primary" href="../index.html"><span class="live-dot"></span> SEE IT RUNNING ↗</a>
+      <a class="btn ghost" href="https://github.com/girijesh18/portfolio" target="_blank" rel="noopener">SOURCE ↗</a>
+    </div>
+  </header>
+
+  <article>
+    <figure>
+      <img class="shot" src="../uploads/portfolio.png" alt="The portfolio hero: particles forming the word GIRIJESH">
+      <figcaption>Chapter 1. Those letters are ~24,000 individually positioned points.</figcaption>
+    </figure>
+
+    <h2>The constraint that produced the design</h2>
+    <p>I wanted a portfolio that demonstrated engineering rather than describing it, and I wanted it to stay honest about cost: no build step, no framework, no bundle, one file. Whatever it did had to run at 60fps on a laptop that's also on a video call.</p>
+    <p>That rules out the obvious approach — a scene per section, models loaded, materials swapped. Instead: <strong>allocate the particles once, and never allocate again.</strong> Every visual in the site is the same buffer, interpolated to a different target. Scrolling doesn't create anything; it just changes where the points are heading.</p>
+
+    <h2>Shapes are just Float32Arrays</h2>
+    <p>Each chapter has a target shape, and a shape is nothing more than <code>N × 3</code> floats — a position for every particle. They're generated once at startup:</p>
+    <pre><code>this.shapes = [
+  this.shapeCloud(N),   // 0 · text: GIRIJESH
+  this.shapeNeural(N),  // 1 · a graph with nodes and edges
+  this.shapeTree(N),    // 2 · hierarchical retrieval tree
+  this.shapeOrbit(N),   // 3 · live systems in orbit
+  this.shapeTowers(N),  // 4 · data towers
+  this.shapeGlobe(N),   // 5 · four regions
+  this.shapeCloud(N),   // 6 · text: LET'S TALK
+];</code></pre>
+    <p>Each generator is a small piece of geometry with a bias toward looking organic rather than correct. The neural one, for example, distributes 120 nodes on a sphere using the golden-angle spiral, connects any pair closer than a threshold (with a coin flip, so the graph isn't uniformly dense), then scatters particles <em>either</em> onto a node or along an edge — 50/50. Points on nodes get a fat Gaussian jitter; points on edges get a tight one. That asymmetry is what makes it read as "network" instead of "noise."</p>
+    <p>The jitter comes from summing three uniform randoms — a cheap approximation of a Gaussian, and one of the oldest tricks in graphics:</p>
+    <pre><code>g_() { return (Math.random() + Math.random() + Math.random() - 1.5); }</code></pre>
+
+    <h2>Scroll position is a float, not a section index</h2>
+    <p>The core of the whole thing is one number I call <code>cf</code> — chapter float. Each chapter anchor is a DOM element; I find the two the viewport midpoint currently sits between and compute the fractional position:</p>
+    <pre><code>// mid-viewport is 40% of the way from chapter 2 to chapter 3 → cf = 2.4
+cfT = k + (mid - centerOf(A[k])) / (centerOf(A[k+1]) - centerOf(A[k]));
+this.cf += (cfT - this.cf) * 0.07;   // exponential smoothing</code></pre>
+    <p>That second line is load-bearing. Raw scroll position is jittery, and trackpad momentum makes it worse. Easing the internal value toward the target every frame means the particles keep drifting for a beat after you stop scrolling — which is what makes it feel like a physical system rather than a scrubber.</p>
+    <p>Then <code>cf</code> picks the two shapes to blend and how far between them:</p>
+    <pre><code>const i0 = Math.floor(cf), f = cf - i0;
+const SA = this.shapes[i0], SB = this.shapes[i0 + 1];</code></pre>
+
+    <h2>The trick that makes it feel alive: per-particle stagger</h2>
+    <p>If every particle interpolates on the same schedule, the morph looks like a slideshow crossfade. The shape dissolves and reassembles in lockstep, and it reads as cheap.</p>
+    <p>So each particle gets a fixed random delay, assigned once:</p>
+    <pre><code>this.stag[i] = Math.random() * 0.22;      // per-particle head start
+
+let ff = (f - stag[i]) / 0.78;            // shift and rescale its window
+ff = clamp(ff, 0, 1);
+ff = ff * ff * (3 - 2 * ff);              // smoothstep</code></pre>
+    <p>Now particle 3 starts moving immediately and particle 9,000 waits until the transition is 22% done. The shape doesn't morph — it <em>disintegrates and re-forms</em>, with a leading edge and a trailing edge. One extra float per particle, and it's the difference between "a slide transition" and "a swarm making a decision."</p>
+    <p>The <code>smoothstep</code> on top means no particle starts or stops abruptly. And on every frame the actual buffer chases its target rather than snapping to it, which adds one more layer of lag:</p>
+    <pre><code>arr[j] += (target - arr[j]) * 0.07;</code></pre>
+
+    <h2>Turning text into particles with a 2D canvas</h2>
+    <p>"GIRIJESH" and "LET'S TALK" aren't 3D text geometry — no font loader, no extrusion, no extra dependency. They're rasterized on an invisible 2D canvas and sampled:</p>
+    <ol>
+      <li>Draw the string to an offscreen <code>&lt;canvas&gt;</code> at 220px, white on transparent.</li>
+      <li>Read back the pixels with <code>getImageData</code>.</li>
+      <li>Walk the grid every 3px and keep any pixel with <strong>alpha &gt; 120</strong>.</li>
+      <li>Map those 2D coordinates into world space. That's your point cloud.</li>
+      <li>For each of the 24,000 particles, pick a random point from that cloud and add a sub-pixel wobble.</li>
+    </ol>
+    <p>The whole thing is about twenty lines, works with any font the browser already has, and re-runs on resize so the text always fits the viewport. It also means a shape can be <em>any</em> glyph or icon you can draw on a canvas — which is a much bigger door than I needed to open.</p>
+    <p>One gotcha: it has to wait for <code>document.fonts.ready</code>. Sample too early and you rasterize the fallback font, so the particles spell your name in Arial.</p>
+
+    <h2>Cost control</h2>
+    <ul>
+      <li><strong>One draw call.</strong> A single <code>BufferGeometry</code>, a single <code>THREE.Points</code>. 24,000 particles cost roughly what one does.</li>
+      <li><strong>The sprite is generated, not loaded.</strong> A 64×64 radial-gradient canvas becomes the point texture — no image request, no HTTP round trip.</li>
+      <li><strong>Additive blending, <code>depthWrite: false</code>.</strong> Overlapping particles glow instead of z-fighting, and skipping depth sorting is free performance.</li>
+      <li><strong>Mobile gets 9,000 particles instead of 24,000</strong>, larger points, and the camera pulled back 1.5×. Same code path, different constant.</li>
+      <li><strong>Pointer parallax is smoothed the same way as scroll</strong> — the camera drifts toward the cursor rather than tracking it, so a fast mouse doesn't cause a whip-pan.</li>
+    </ul>
+
+    <h2>What I'd tell someone copying this</h2>
+    <p>The engine is not the interesting part — it's maybe 200 lines and most of it is geometry. What makes it work is that <strong>every parameter is tuned toward lag</strong>: smoothed scroll, staggered particles, eased interpolation, drifting camera. Nothing in the scene responds to input instantly, and that's precisely why it feels expensive.</p>
+    <p>The failure mode of a portfolio like this is that it becomes a tech demo wearing a resume. The scenes earn their place by mapping to the content — a graph for systems, a retrieval tree for the RAG work, towers for the numbers, a globe for four regions. If the visual doesn't argue for the section it's under, cut it.</p>
+
+    <div class="tags">
+      <span>three.js</span><span>WebGL</span><span>BufferGeometry</span><span>Canvas 2D</span><span>Zero build step</span>
+    </div>
+  </article>
+
+  <footer class="post-footer">
+    <span>GIRIJESH SINGH · LEAD DATA SCIENTIST</span>
+    <span><a href="index.html">← All writing</a></span>
+  </footer>
+</div>
+
+</body>
+</html>
